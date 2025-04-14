@@ -35,6 +35,6 @@ class Tarea extends Model {
     }
     
     public function getPrecioTotalAttribute() {
-        return $this->getTotalMateriales() + $this->precioDelTrabajo;
+        return $this->getTotalMateriales() + $this->precio_de_trabajo;
     }
 }

@@ -8,9 +8,9 @@ return new class extends Migration {
 
     public function up(): void
     {
-        Schema::create('datos_vehiculos', function (Blueprint $table) {
+        Schema::create('vehiculos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('datos_cliente_id')->constrained('datos_clientes')->onDelete('cascade');
+            $table->foreignId('cliente_id')->constrained('clientes')->onDelete('cascade');
             $table->string('modelo');
             $table->string('marca');
             $table->string('color');
@@ -23,6 +23,6 @@ return new class extends Migration {
     }
 
     public function down(): void {
-        Schema::dropIfExists('datos_vehiculos');
+        Schema::dropIfExists('vehiculos');
     }
 };

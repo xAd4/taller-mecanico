@@ -11,7 +11,7 @@ class ProductoUsado extends Model {
     protected $fillable = [
         'tarea_id',
         'producto_id',
-        'cantidad_usada',
+        'cantidad',
     ];
 
     public function tarea() {
@@ -23,6 +23,6 @@ class ProductoUsado extends Model {
     }
 
     public function calcularTotal() {
-        return $this->cantidadUsada * $this->producto->precio;
+        return $this->cantidad * $this->producto->precio;
     }
 }

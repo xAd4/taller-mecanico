@@ -50,5 +50,4 @@ class User extends Authenticatable {
     public function tareasAsignadas() {
         return $this->hasMany(Tarea::class, 'mecanico_id');
     }
-
 }
