@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EstadoNeumaticoController;
@@ -17,6 +18,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+
+Route::middleware("throttle:auth")->group(function () {
+    // Registro y login
+    Route::post("registro", [AuthController::class, "register"]);
+    Route::post("iniciar-sesion", [AuthController::class, "login"]);
+
+    // Logout (requiere autenticación)
+    Route::middleware("auth:sanctum")->group(function () {
+        Route::post("cerrar-sesion", [AuthController::class, "logout"]);
+    });
+});
 
 Route::middleware('throttle:limitador_global')->group(function () {
     Route::apiResource('categorias', CategoriaController::class);
