@@ -15,7 +15,7 @@ class ProductoUsadoController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $productos_usados = ProductoUsado::with('tarea')->paginate(10);
+            $productos_usados = ProductoUsado::with(['tarea', 'producto'])->paginate(10);
             return response()->json([
                 'status' => true,
                 'data' => $productos_usados,
