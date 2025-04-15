@@ -3,7 +3,7 @@
 namespace App\Policies;
 use App\Models\User;
 
-class FormularioOrdenPolicy {
+class TareaPolicy {
     /**
      * Create a new policy instance.
      */
