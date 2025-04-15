@@ -34,9 +34,9 @@ class TareaController extends Controller {
      */
     public function store(Request $request): JsonResponse {
         $validador = $request->validate([
-            'orden_id' => 'required|integer',
-            'mecanico_id' => 'required|integer',
-            'estado_de_trabajo' => 'required|in:pendiente,en_progreso,completado',
+            'orden_id' => 'required|integer|exists:orden,id',
+            'mecanico_id' => 'required|integer|exists:users,id',
+            'estado_de_trabajo' => 'required|in:pendiente,en_proceso,completado',
             'precio_de_trabajo' => 'required|numeric',
             'detalles' => 'nullable|string|max:255',
         ]);

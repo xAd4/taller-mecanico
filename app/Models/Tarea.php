@@ -15,10 +15,6 @@ class Tarea extends Model {
         'precio_de_trabajo',
         'detalles_de_tarea',
         'notificacion_al_cliente',
-        'tren_delantero_id',
-        'tren_trasero_id',
-        'freno_id',
-        'estado_neumatico_id',
     ];
 
 

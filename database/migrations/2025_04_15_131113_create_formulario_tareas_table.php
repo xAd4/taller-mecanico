@@ -15,10 +15,6 @@ return new class extends Migration {
             $table->decimal('precio_de_trabajo', 10, 2)->default(0);
             $table->text('detalles_de_tarea')->nullable();
             $table->text('notificacion_al_cliente')->nullable();
-            $table->foreignId('tren_delantero_id')->nullable()->constrained('tren_delantero')->onDelete('cascade');
-            $table->foreignId('tren_trasero_id')->nullable()->constrained('tren_trasero')->onDelete('cascade');
-            $table->foreignId('freno_id')->nullable()->constrained('frenos')->onDelete('cascade');
-            $table->foreignId('estado_neumatico_id')->nullable()->constrained('estado_neumaticos')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -1,0 +1,120 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\TrenTrasero;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+
+// TODO: Borrar las respuestas de error para que no se exponga información sensible en producción.
+// Se considerará agregar visualización detallada de productos si aplica.
+// Se tiene que agregar la lógica para permitir el uso de imágenes
+
+class TrenTraseroController extends Controller {
+    /**
+     * Listado de todos los trenes traseros paginados
+     */
+    public function index(): JsonResponse {
+        try {
+            $trenes_traseros = TrenTrasero::with('tarea')->paginate(10);
+
+            return response()->json([
+                'status'  => true,
+                'data'    =>    $trenes_traseros,
+                'message' => 'Trenes traseros obtenidos correctamente',
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status'  => false,
+                'message' => 'Error al obtener los trenes traseros',
+                'error'   => $th->getMessage(),
+            ], 400);
+        }
+    }
+
+    /**
+     * Creación de nuevas instancias de tren trasero en la base de datos
+     */
+    public function store(Request $request): JsonResponse {
+        $validador = $request->validate([
+            'tarea_id'        => 'required|integer|exists:tareas,id',
+            'conv'            => 'required|boolean',
+            'comba'           => 'required|boolean',
+            'brazos_susp'     => 'required|boolean',
+            'articulaciones'  => 'required|boolean',
+            'amort'           => 'required|boolean',
+        ]);
+
+        try {
+            $nuevo_tren_trasero = TrenTrasero::create([
+                'tarea_id'       => $validador['tarea_id'],
+                'conv'           => $validador['conv'],
+                'comba'          => $validador['comba'],
+                'brazos_susp'    => $validador['brazos_susp'],
+                'articulaciones' => $validador['articulaciones'],
+                'amort'          => $validador['amort'],
+            ]);
+
+            return response()->json([
+                'status'  => true,
+                'data'    => $nuevo_tren_trasero,
+                'message' => 'Tren trasero creado correctamente',
+            ], 201);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status'  => false,
+                'message' => 'Error al crear un nuevo tren trasero',
+                'error'   => $th->getMessage(),
+            ], 400);
+        }
+    }
+
+    /**
+     * Actualización de instancias de tren trasero en la base de datos
+     */
+    public function update(Request $request, string $id): JsonResponse {
+        $validador = $request->validate([
+            'tarea_id'        => 'sometimes|integer|exists:tareas,id',
+            'conv'            => 'sometimes|boolean',
+            'comba'           => 'sometimes|boolean',
+            'brazos_susp'     => 'sometimes|boolean',
+            'articulaciones'  => 'sometimes|boolean',
+            'amort'           => 'sometimes|boolean',
+        ]);
+
+        try {
+            $tren_trasero = TrenTrasero::findOrFail($id);
+            $tren_trasero->update($validador);
+
+            return response()->json([
+                'status'  => true,
+                'data'    => $tren_trasero,
+                'message' => 'Tren trasero actualizado correctamente',
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status'  => false,
+                'message' => 'Error al actualizar el tren trasero',
+                'error'   => $th->getMessage(),
+            ], 400);
+        }
+    }
+
+    /**
+     * Borrar una instancia de tren trasero en la base de datos
+     */
+    public function destroy(string $id): JsonResponse {
+        try {
+            $tren_trasero = TrenTrasero::findOrFail($id);
+            $tren_trasero->delete();
+
+            return response()->json(null, 204);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status'  => false,
+                'message' => 'Error al eliminar el tren trasero',
+                'error'   => $th->getMessage(),
+            ], 400);
+        }
+    }
+}

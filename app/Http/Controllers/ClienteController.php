@@ -61,7 +61,7 @@ class ClienteController extends Controller {
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
-                'message' => 'Error al obtener los clientes',
+                'message' => 'Error al crear cliente',
                 'error' => $th->getMessage(),
             ], 400);
         }
