@@ -36,9 +36,9 @@ class OrdenController extends Controller {
     public function store(Request $request): JsonResponse {
         $validador = $request->validate([
             'cliente_id' => 'required|integer|exists:clientes,id',
-            'datos_extras' => 'nullable|string|max:255',
+            'datos_extras' => 'nullable|string',
             'recepcion' => 'required|date',
-            'prometido' => 'required|date',
+            'prometido' => 'nullable|date',
             'cambio_de_aceite' => 'boolean|nullable',
             'cambio_de_filtro' => 'boolean|nullable',
             'detalles' => 'required|string|max:255',

@@ -14,7 +14,7 @@ class TareaController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $tareas = Tarea::with(['orden','productosUsados','mecanico'])->paginate(10);
+            $tareas = Tarea::with(['orden','productosUsados','mecanico','trenDelantero','trenTrasero','frenos','estadoNeumaticos'])->paginate(10);
             return response()->json([
                 'status' => true,
                 'data' => $tareas,
@@ -34,11 +34,12 @@ class TareaController extends Controller {
      */
     public function store(Request $request): JsonResponse {
         $validador = $request->validate([
-            'orden_id' => 'required|integer|exists:orden,id',
+            'orden_id' => 'required|integer|exists:ordens,id',
             'mecanico_id' => 'required|integer|exists:users,id',
             'estado_de_trabajo' => 'required|in:pendiente,en_proceso,completado',
             'precio_de_trabajo' => 'required|numeric',
-            'detalles' => 'nullable|string|max:255',
+            'detalles_de_tarea' => 'nullable|string',
+            'notificacion_al_cliente' => 'nullable|string'
         ]);
 
         try {
@@ -47,7 +48,8 @@ class TareaController extends Controller {
                 'mecanico_id' => $validador['mecanico_id'],
                 'estado_de_trabajo' => $validador['estado_de_trabajo'],
                 'precio_de_trabajo' => $validador['precio_de_trabajo'],
-                'detalles' => $validador['detalles'],
+                'detalles_de_tarea' => $validador['detalles_de_tarea'],
+                'notificacion_al_cliente' => $validador['notificacion_al_cliente']
             ]);
 
             // Aquí puedes agregar la lógica para calcular el total de materiales y actualizar el precio total
@@ -99,9 +101,11 @@ class TareaController extends Controller {
      */
     public function update(Request $request, string $id): JsonResponse {
         $validador = $request->validate([
+            'mecanico_id' => 'sometimes|integer|exists:users,id',
             'estado_de_trabajo' => 'sometimes|in:pendiente,en_progreso,completado',
             'precio_de_trabajo' => 'sometimes|numeric',
-            'detalles' => 'sometimes|string|max:255',
+            'detalles_de_tarea' => 'sometimes|string|max:255',
+            'notificacion_al_cliente' => 'sometimes|string'
         ]);
 
         try {

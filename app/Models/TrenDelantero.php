@@ -9,6 +9,8 @@ class TrenDelantero extends Model {
 
     use HasFactory;
 
+    protected $table = 'tren_delantero';
+
     protected $fillable = [
         'tarea_id',
         'conv',

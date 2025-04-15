@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class TrenTrasero extends Model {
     use HasFactory;
 
+    protected $table = 'tren_trasero';
+
     protected $fillable = [
         "tarea_id",
         "conv",

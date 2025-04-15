@@ -36,6 +36,7 @@ class VehiculoController extends Controller {
         $validador = $request->validate([
             'cliente_id' => 'required|integer',
             'modelo' => 'required|string|max:255',
+            'marca' => 'required|string|max:255',
             'color' => 'required|string|max:255',
             'matricula' => 'required|string|max:255',
             'kilometraje' => 'required|integer|min:0',
@@ -48,6 +49,7 @@ class VehiculoController extends Controller {
             $nuevo_vehiculo = Vehiculo::create([
                 'cliente_id' => $validador['cliente_id'],
                 'modelo' => $validador['modelo'],
+                'marca' => $validador['marca'],
                 'color' => $validador['color'],
                 'matricula' => $validador['matricula'],
                 'kilometraje' => $validador['kilometraje'],
@@ -97,6 +99,7 @@ class VehiculoController extends Controller {
         $validador = $request->validate([
             'cliente_id' => 'sometimes|integer',
             'modelo' => 'sometimes|string|max:255',
+            'marca' => 'sometimes|string|max:255',
             'color' => 'sometimes|string|max:255',
             'matricula' => 'sometimes|string|max:255',
             'kilometraje' => 'sometimes|integer|min:0',

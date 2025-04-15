@@ -13,6 +13,7 @@ class Vehiculo extends Model {
     protected $fillable = [
         'cliente_id',
         'modelo',
+        'marca',
         'color',
         'matricula',
         'kilometraje',

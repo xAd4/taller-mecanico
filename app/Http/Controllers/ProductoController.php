@@ -42,7 +42,7 @@ class ProductoController extends Controller {
             'imagen' => 'nullable|string|max:255',
             'stock' => 'required|integer|min:0',
             'precio' => 'required|numeric|min:0',
-            'disponibilidad' => 'required|boolean',
+            'disponibilidad' => 'nullable|boolean',
         ]);
         try {
             $nuevo_producto = Producto::create([
