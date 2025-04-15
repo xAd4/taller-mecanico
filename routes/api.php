@@ -14,10 +14,12 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::apiResource('categorias', CategoriaController::class);
-Route::apiResource('productos', ProductoController::class);
-Route::apiResource('ordenes', OrdenController::class);
-Route::apiResource('clientes', ClienteController::class);
-Route::apiResource('vehiculos', VehiculoController::class);
-Route::apiResource('tareas', TareaController::class);
-Route::apiResource('productos-usados', ProductoUsadoController::class);
+Route::middleware('throttle:limitador_global')->group(function () {
+    Route::apiResource('categorias', CategoriaController::class);
+    Route::apiResource('productos', ProductoController::class);
+    Route::apiResource('ordenes', OrdenController::class);
+    Route::apiResource('clientes', ClienteController::class);
+    Route::apiResource('vehiculos', VehiculoController::class);
+    Route::apiResource('tareas', TareaController::class);
+    Route::apiResource('productos-usados', ProductoUsadoController::class);
+});
