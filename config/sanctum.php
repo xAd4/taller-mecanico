@@ -46,7 +46,8 @@ return [
     |
     */
 
-    'expiration' => null,
+    // Agrega dos horas de expiracion
+    'expiration' => env('EXPIRATION_TOKEN'),
 
     /*
     |--------------------------------------------------------------------------

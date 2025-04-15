@@ -13,8 +13,30 @@ class Tarea extends Model {
         'mecanico_id',
         'estado_de_trabajo',
         'precio_de_trabajo',
-        'detalles',
+        'detalles_de_tarea',
+        'notificacion_al_cliente',
+        'tren_delantero_id',
+        'tren_trasero_id',
+        'freno_id',
+        'estado_neumatico_id',
     ];
+
+
+    public function trenDelantero() {
+        return $this->hasOne(TrenDelantero::class);
+    }
+
+    public function trenTrasero() {
+        return $this->hasOne(TrenTrasero::class);
+    }
+
+    public function frenos() {
+        return $this->hasOne(Frenos::class);
+    }
+
+    public function estadoNeumaticos() {
+        return $this->hasOne(EstadoNeumatico::class);
+    }
 
     public function orden() {
         return $this->belongsTo(Orden::class);
