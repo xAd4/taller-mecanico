@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\ProductoUsado;
 use App\Models\Tarea;
 use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -18,10 +19,16 @@ class AppServiceProvider extends ServiceProvider {
 
     public function boot(): void {
 
-        // // Gate para permitir actualizar una tarea si el id del usuario coincide con el id de la tarea
-        // Gate::define('actualizar-tarea', function (User $user, Tarea $tarea){
-        //     return $user->id === $tarea->mecanico_id;
-        // });
+//         // Gate para permitir actualizar una tarea si el id del usuario coincide con el id de la tarea
+//         Gate::define('actualizar-tarea', function (User $user, Tarea $tarea){
+//             return $user->id === $tarea->mecanico_id;
+//         });
+
+        //* Gates
+        // Checar que solo el mecanico pueda manipular su propia tarea y no la de otros mecanicos
+        Gate::define('checar-id-mecanico', function (User $user, Tarea $tarea) {
+            return $user->id === $tarea->mecanico_id;
+        });
 
         RateLimiter::for('auth', function (Request $request) {
             return Limit::perMinute(5)->by($request->user()?->id ?: $request->ip());
@@ -35,6 +42,6 @@ class AppServiceProvider extends ServiceProvider {
             return Limit::perMinute(10)->by($request->user()?->id ?: $request->ip());
         });
 
-    
+
     }
 }

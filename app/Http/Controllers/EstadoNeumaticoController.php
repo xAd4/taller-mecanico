@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\EstadoNeumatico;
+use App\Models\Tarea;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 // TODO: Borrar las respuestas de error para que no se exponga información sensible en producción.
 // Se considerará agregar visualización detallada de estados de neumático si aplica.
 // Se tiene que agregar la lógica para permitir el uso de imágenes
 
 class EstadoNeumaticoController extends Controller {
+    use AuthorizesRequests;
     /**
      * Listado de todos los estados de neumático paginados
      */
@@ -45,6 +49,9 @@ class EstadoNeumaticoController extends Controller {
         ]);
 
         try {
+            $tarea = Tarea::findOrFail($validador['tarea_id']);
+            $this->authorize('checar-id-mecanico', $tarea);
+
             $nuevo_estado = EstadoNeumatico::create([
                 'tarea_id'               => $validador['tarea_id'],
                 'delanteros_derechos'    => $validador['delanteros_derechos'],
@@ -81,6 +88,11 @@ class EstadoNeumaticoController extends Controller {
 
         try {
             $estado = EstadoNeumatico::findOrFail($id);
+            $tarea = $estado->tarea;
+
+            if (!Gate::allows('checar-id-mecanico', $tarea)){
+                return response()->json(['error' => 'Accion no autorizada'], 403);
+            }
             $estado->update($validador);
 
             return response()->json([
@@ -103,6 +115,12 @@ class EstadoNeumaticoController extends Controller {
     public function destroy(string $id): JsonResponse {
         try {
             $estado = EstadoNeumatico::findOrFail($id);
+            $tarea = $estado->tarea;
+
+            if (!Gate::allows('checar-id-mecanico', $tarea)){
+                return response()->json(['error' => 'Accion no autorizada'], 403);
+            }
+
             $estado->delete();
 
             return response()->json(null, 204);

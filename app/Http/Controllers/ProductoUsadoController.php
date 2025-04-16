@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductoUsado;
+use App\Models\Tarea;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 // TODO: Borrar las respuestas de error para que no se exponga información sensible en producción.
-
-
 class ProductoUsadoController extends Controller {
+
+    use AuthorizesRequests;
     /**
      * Listado de productos usados por tarea
      */
@@ -34,6 +37,7 @@ class ProductoUsadoController extends Controller {
      * Creación de nuevas instancias de productos usados en la base de datos
      */
     public function store(Request $request): JsonResponse{
+
         $validador = $request->validate([
             'tarea_id' => 'required|integer|exists:tareas,id',
             'producto_id' => 'required|integer|exists:productos,id',
@@ -41,6 +45,10 @@ class ProductoUsadoController extends Controller {
         ]);
 
         try {
+
+            $tarea = Tarea::findOrFail($validador['tarea_id']);
+            $this->authorize('checar-id-mecanico', $tarea);
+
             $nuevo_producto_usado = ProductoUsado::create([
                 'tarea_id' => $validador['tarea_id'],
                 'producto_id' => $validador['producto_id'],
@@ -73,6 +81,11 @@ class ProductoUsadoController extends Controller {
 
         try {
             $producto_usado = ProductoUsado::with('tarea')->findOrFail($id);
+            $tarea = $producto_usado->tarea;
+
+            if (!Gate::allows('checar-id-mecanico', $tarea)){
+                return response()->json(['error' => 'Accion no autorizada'], 403);
+            }
             $producto_usado->update($validador);
 
             return response()->json([
@@ -94,7 +107,13 @@ class ProductoUsadoController extends Controller {
      */
     public function destroy(string $id): JsonResponse{
         try {
-            $producto_usado = ProductoUsado::with('tarea')->findOrFail($id);
+            $producto_usado = ProductoUsado::findOrFail($id);
+            $tarea = $producto_usado->tarea;
+
+            if (!Gate::allows('checar-id-mecanico', $tarea)){
+                return response()->json(['error' => 'Accion no autorizada'], 403);
+            }
+
             $producto_usado->delete();
 
             return response()->json(null, 204);

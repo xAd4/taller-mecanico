@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tarea;
 use App\Models\TrenTrasero;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 // TODO: Borrar las respuestas de error para que no se exponga información sensible en producción.
 // Se considerará agregar visualización detallada de productos si aplica.
 // Se tiene que agregar la lógica para permitir el uso de imágenes
 
 class TrenTraseroController extends Controller {
+
+    use AuthorizesRequests;
     /**
      * Listado de todos los trenes traseros paginados
      */
@@ -48,6 +53,9 @@ class TrenTraseroController extends Controller {
         ]);
 
         try {
+            $tarea = Tarea::findOrFail($validador['tarea_id']);
+            $this->authorize('checar-id-mecanico', $tarea);
+
             $nuevo_tren_trasero = TrenTrasero::create([
                 'tarea_id'       => $validador['tarea_id'],
                 'conv'           => $validador['conv'],
@@ -90,6 +98,11 @@ class TrenTraseroController extends Controller {
 
         try {
             $tren_trasero = TrenTrasero::findOrFail($id);
+            $tarea = $tren_trasero->tarea;
+
+            if (!Gate::allows('checar-id-mecanico', $tarea)){
+                return response()->json(['error' => 'Accion no autorizada'], 403);
+            }
             $tren_trasero->update($validador);
 
             return response()->json([
@@ -112,6 +125,12 @@ class TrenTraseroController extends Controller {
     public function destroy(string $id): JsonResponse {
         try {
             $tren_trasero = TrenTrasero::findOrFail($id);
+            $tarea = $tren_trasero->tarea;
+
+            if (!Gate::allows('checar-id-mecanico', $tarea)){
+                return response()->json(['error' => 'Accion no autorizada'], 403);
+            }
+
             $tren_trasero->delete();
 
             return response()->json(null, 204);

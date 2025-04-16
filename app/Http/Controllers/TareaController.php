@@ -100,6 +100,7 @@ class TareaController extends Controller {
      */
     public function update(Request $request, string $id): JsonResponse {
         $validador = $request->validate([
+
             'estado_de_trabajo' => 'sometimes|in:pendiente,en_progreso,completado',
             'detalles_de_tarea' => 'sometimes|string|max:255',
             'notificacion_al_cliente' => 'sometimes|string'
@@ -108,9 +109,9 @@ class TareaController extends Controller {
         try {
             $tarea = Tarea::findOrFail($id);
 
-            // if (!Gate::allows('actualizar-tarea', $tarea)){
-            //     return response()->json(['error' => 'Accion no autorizada'], 403);
-            // }
+             if (!Gate::allows('checar-id-mecanico', $tarea)){
+                 return response()->json(['error' => 'Accion no autorizada'], 403);
+             }
 
             $tarea->update($validador);
 
@@ -129,7 +130,7 @@ class TareaController extends Controller {
     }
 
     /**
-     * Borrar una instancias de tareas hechas por jefes llevadas por mecánicos
+     * Borrar una instancia de tareas hechas por jefes llevadas por mecánicos
      */
     public function destroy(string $id): JsonResponse {
         try {
