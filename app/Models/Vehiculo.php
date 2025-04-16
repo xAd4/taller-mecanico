@@ -11,7 +11,6 @@ class Vehiculo extends Model {
     protected $table = 'vehiculos';
 
     protected $fillable = [
-        'cliente_id',
         'modelo',
         'marca',
         'color',
@@ -22,7 +21,7 @@ class Vehiculo extends Model {
         'fecha_de_compra',
     ];
 
-    public function cliente() {
-        return $this->belongsTo(Cliente::class);
+    public function ordenes() {
+        return $this->hasMany(Orden::class);
     }
 }

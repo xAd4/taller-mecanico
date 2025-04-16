@@ -23,8 +23,4 @@ class Cliente extends Model {
     public function ordenes() { 
         return $this->hasMany(Orden::class, 'cliente_id');
     }
-
-    public function vehiculos() {
-        return $this->hasMany(Vehiculo::class, 'cliente_id');
-    }
 }

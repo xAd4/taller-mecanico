@@ -10,6 +10,7 @@ class Orden extends Model {
 
     protected $fillable = [
         'cliente_id',
+        'vehiculo_id',
         'datos_extras',
         'recepcion',
         'prometido',
@@ -20,5 +21,9 @@ class Orden extends Model {
 
     public function cliente() {
         return $this->belongsTo(Cliente::class);
+    }
+
+    public function vehiculo() {
+        return $this->belongsTo(Vehiculo::class);
     }
 }

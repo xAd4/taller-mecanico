@@ -14,7 +14,7 @@ class OrdenController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $ordenes = Orden::with('cliente')->paginate(10);
+            $ordenes = Orden::with(['cliente', 'vehiculo'])->paginate(10);
 
             return response()->json([
                 'status' => true,
@@ -36,6 +36,7 @@ class OrdenController extends Controller {
     public function store(Request $request): JsonResponse {
         $validador = $request->validate([
             'cliente_id' => 'required|integer|exists:clientes,id',
+            'vehiculo_id' => 'required|integer|exists:vehiculos,id',
             'datos_extras' => 'nullable|string',
             'recepcion' => 'required|date',
             'prometido' => 'nullable|date',
@@ -47,6 +48,7 @@ class OrdenController extends Controller {
         try {
             $nueva_orden = Orden::create([
                 'cliente_id' => $validador['cliente_id'],
+                'vehiculo_id' => $validador['vehiculo_id'],
                 'datos_extras' => $validador['datos_extras'],
                 'recepcion' => $validador['recepcion'],
                 'prometido' => $validador['prometido'],
@@ -96,6 +98,7 @@ class OrdenController extends Controller {
     public function update(Request $request, string $id): JsonResponse {
         $validador = $request->validate([
             'cliente_id' => 'sometimes|integer|exists:clientes,id',
+            'vehiculo_id' => 'sometimes|integer|exists:vehiculos,id',
             'datos_extras' => 'sometimes|string|max:255',
             'recepcion' => 'sometimes|date',
             'prometido' => 'sometimes|date',

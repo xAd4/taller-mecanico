@@ -34,7 +34,6 @@ class VehiculoController extends Controller {
      */
     public function store(Request $request): JsonResponse {
         $validador = $request->validate([
-            'cliente_id' => 'required|integer',
             'modelo' => 'required|string|max:255',
             'marca' => 'required|string|max:255',
             'color' => 'required|string|max:255',
@@ -47,7 +46,6 @@ class VehiculoController extends Controller {
 
         try {
             $nuevo_vehiculo = Vehiculo::create([
-                'cliente_id' => $validador['cliente_id'],
                 'modelo' => $validador['modelo'],
                 'marca' => $validador['marca'],
                 'color' => $validador['color'],
@@ -97,7 +95,6 @@ class VehiculoController extends Controller {
      */
     public function update(Request $request, string $id): JsonResponse{
         $validador = $request->validate([
-            'cliente_id' => 'sometimes|integer',
             'modelo' => 'sometimes|string|max:255',
             'marca' => 'sometimes|string|max:255',
             'color' => 'sometimes|string|max:255',

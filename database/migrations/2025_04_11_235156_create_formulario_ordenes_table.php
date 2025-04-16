@@ -10,6 +10,7 @@ return new class extends Migration {
         Schema::create('ordens', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cliente_id')->constrained('clientes')->onDelete('cascade');
+            $table->foreignId('vehiculo_id')->constrained('vehiculos')->onDelete('cascade');
             $table->string('datos_extras')->nullable();
             $table->date('recepcion');
             $table->date('prometido')->nullable();
