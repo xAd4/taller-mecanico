@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('marca');
             $table->string('color');
             $table->string('matricula')->unique();
-            $table->string('kilometraje');
+            $table->string('kilometraje')->nullable();
             $table->string('numero_de_serie')->nullable();
             $table->string('numero_de_motor')->nullable();
             $table->date('fecha_de_compra')->nullable();

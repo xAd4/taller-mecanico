@@ -43,6 +43,9 @@ class TrenDelanteroController extends Controller {
             'punteros'        => 'required|boolean',
             'bujes'           => 'required|boolean',
             'caja_direccion'  => 'required|boolean',
+            'conv2'           => 'required|boolean',
+            'comba2'          => 'required|boolean',
+            'avance2'         => 'required|boolean',
             'amort'           => 'required|boolean',
         ]);
 
@@ -56,6 +59,9 @@ class TrenDelanteroController extends Controller {
                 'punteros'       => $validador['punteros'],
                 'bujes'          => $validador['bujes'],
                 'caja_direccion' => $validador['caja_direccion'],
+                'conv2'          => $validador['conv2'],
+                'comba2'         => $validador['comba2'],
+                'avance2'        => $validador['avance2'],
                 'amort'          => $validador['amort'],
             ]);
 
@@ -86,6 +92,9 @@ class TrenDelanteroController extends Controller {
             'punteros'        => 'sometimes|boolean',
             'bujes'           => 'sometimes|boolean',
             'caja_direccion'  => 'sometimes|boolean',
+            'conv2'           => 'sometimes|boolean',
+            'comba2'          => 'sometimes|boolean',
+            'avance2'         => 'sometimes|boolean',
             'amort'           => 'sometimes|boolean',
         ]);
 

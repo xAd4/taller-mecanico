@@ -11,8 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('orden_id')->constrained('ordens')->onDelete('cascade');
             $table->foreignId('mecanico_id')->constrained('users')->onDelete('cascade');
-            $table->enum('estado_de_trabajo', ['pendiente', 'en_proceso', 'completado'])->default('pendiente');
-            $table->decimal('precio_de_trabajo', 10, 2)->default(0);
+            $table->enum('estado_de_trabajo', ['pendiente', 'en_proceso', 'pendiente_de_facturacion' ,'completado'])->default('pendiente');
             $table->text('detalles_de_tarea')->nullable();
             $table->text('notificacion_al_cliente')->nullable();
             $table->timestamps();

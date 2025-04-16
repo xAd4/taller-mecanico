@@ -17,6 +17,8 @@ return new class extends Migration
             $table->boolean('comba')->default(false);
             $table->boolean('brazos_susp')->default(false);
             $table->boolean('articulaciones')->default(false);
+            $table->boolean('conv2')->default(false);
+            $table->boolean('comba2')->default(false);
             $table->boolean('amort')->default(false);
             $table->timestamps();
         });

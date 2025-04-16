@@ -20,6 +20,9 @@ return new class extends Migration
             $table->boolean('punteros')->default(false);
             $table->boolean('bujes')->default(false);
             $table->boolean('caja_direccion')->default(false);
+            $table->boolean('conv2')->default(false);
+            $table->boolean('comba2')->default(false);
+            $table->boolean('avance2')->default(false);
             $table->boolean('amort')->default(false);
             $table->timestamps();
         });

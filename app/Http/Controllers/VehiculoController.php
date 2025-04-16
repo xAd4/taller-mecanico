@@ -14,7 +14,7 @@ class VehiculoController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $vehiculos = Vehiculo::with('cliente')->paginate(10);
+            $vehiculos = Vehiculo::with(['cliente', 'orden'])->paginate(10);
             return response()->json([
                 'status' => true,
                 'data' => $vehiculos,
@@ -39,7 +39,7 @@ class VehiculoController extends Controller {
             'marca' => 'required|string|max:255',
             'color' => 'required|string|max:255',
             'matricula' => 'required|string|max:255',
-            'kilometraje' => 'required|integer|min:0',
+            'kilometraje' => 'nullable|string',
             'numero_de_serie' => 'nullable|string|max:255',
             'numero_de_motor' => 'nullable|string|max:255',
             'fecha_de_compra' => 'nullable|date',
@@ -102,7 +102,7 @@ class VehiculoController extends Controller {
             'marca' => 'sometimes|string|max:255',
             'color' => 'sometimes|string|max:255',
             'matricula' => 'sometimes|string|max:255',
-            'kilometraje' => 'sometimes|integer|min:0',
+            'kilometraje' => 'sometimes|string',
             'numero_de_serie' => 'sometimes|string|max:255',
             'numero_de_motor' => 'sometimes|string|max:255',
             'fecha_de_compra' => 'sometimes|date',

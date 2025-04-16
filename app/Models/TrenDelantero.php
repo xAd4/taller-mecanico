@@ -20,7 +20,10 @@ class TrenDelantero extends Model {
         'punteros',
         'bujes',
         'caja_direccion',
-        'amort'
+        'conv2',
+        'comba2',
+        'avance2',
+        'amort',
     ];
 
     public function tarea() {

@@ -38,8 +38,9 @@ class ClienteController extends Controller {
             'nombre' => 'required|string|max:255',
             'apellido' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:clientes,email',
-            'dni' => 'required|string|max:20|unique:clientes,dni',
-            'telefono' => 'nullable|string|max:20',
+            'dni' => 'nullable|string|max:20|unique:clientes,dni',
+            'rut' => 'nullable|string|max:12',
+            'telefono' => 'required|string|max:20',
             'domicilio' => 'nullable|string|max:255',
         ]);
 
@@ -49,6 +50,7 @@ class ClienteController extends Controller {
                 'apellido' => $validador['apellido'],
                 'email' => $validador['email'],
                 'dni' => $validador['dni'],
+                'rut' => $validador['rut'],
                 'telefono' => $validador['telefono'],
                 'domicilio' => $validador['domicilio'],
             ]);
@@ -96,8 +98,9 @@ class ClienteController extends Controller {
             'nombre' => 'sometimes|string|max:255',
             'apellido' => 'sometimes|string|max:255',
             'email' => 'sometimes|email|max:255|unique:clientes,email,' . $id,
-            'dni' => 'sometimes|string|max:20|unique:clientes,dni,' . $id,
-            'telefono' => 'nullable|string|max:20',
+            'dni' => 'nullable|string|max:20|unique:clientes,dni,' . $id,
+            'rut' => 'nullable|string|max:12',
+            'telefono' => 'sometimes|string|max:20',
             'domicilio' => 'nullable|string|max:255',
         ]);
 

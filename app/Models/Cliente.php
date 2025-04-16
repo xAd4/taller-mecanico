@@ -15,6 +15,7 @@ class Cliente extends Model {
         'apellido',
         'email',
         'dni',
+        'rut',
         'telefono',
         'domicilio',
     ];

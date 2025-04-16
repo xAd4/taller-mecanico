@@ -16,6 +16,8 @@ class TrenTrasero extends Model {
         "comba",
         "brazos_susp",
         "articulaciones",
+        'conv2',
+        'comba2',
         "amort",
     ];
 

@@ -12,8 +12,9 @@ return new class extends Migration {
             $table->string('nombre');
             $table->string('apellido');
             $table->string('email');
-            $table->string('dni');
-            $table->string('telefono')->nullable();
+            $table->string('dni')->nullable();
+            $table->string('rut')->nullable();
+            $table->string('telefono');
             $table->string('domicilio')->nullable();
             $table->timestamps();
         });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tarea;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 // TODO: Borrar las respuestas de error para que no se exponga información sensible en producción.
 
@@ -36,8 +37,7 @@ class TareaController extends Controller {
         $validador = $request->validate([
             'orden_id' => 'required|integer|exists:ordens,id',
             'mecanico_id' => 'required|integer|exists:users,id',
-            'estado_de_trabajo' => 'required|in:pendiente,en_proceso,completado',
-            'precio_de_trabajo' => 'required|numeric',
+            'estado_de_trabajo' => 'required|in:pendiente,en_proceso,pendiente_de_facturacion,completado',
             'detalles_de_tarea' => 'nullable|string',
             'notificacion_al_cliente' => 'nullable|string'
         ]);
@@ -47,7 +47,6 @@ class TareaController extends Controller {
                 'orden_id' => $validador['orden_id'],
                 'mecanico_id' => $validador['mecanico_id'],
                 'estado_de_trabajo' => $validador['estado_de_trabajo'],
-                'precio_de_trabajo' => $validador['precio_de_trabajo'],
                 'detalles_de_tarea' => $validador['detalles_de_tarea'],
                 'notificacion_al_cliente' => $validador['notificacion_al_cliente']
             ]);
@@ -61,7 +60,7 @@ class TareaController extends Controller {
             // Si necesitas calcular el precio total, puedes hacerlo aquí
             // $nueva_tarea->precio_total = $nueva_tarea->getPrecioTotalAttribute();
             // $nueva_tarea->save();
-            
+
             return response()->json([
                 'status' => true,
                 'data' => $nueva_tarea,
@@ -101,15 +100,18 @@ class TareaController extends Controller {
      */
     public function update(Request $request, string $id): JsonResponse {
         $validador = $request->validate([
-            'mecanico_id' => 'sometimes|integer|exists:users,id',
             'estado_de_trabajo' => 'sometimes|in:pendiente,en_progreso,completado',
-            'precio_de_trabajo' => 'sometimes|numeric',
             'detalles_de_tarea' => 'sometimes|string|max:255',
             'notificacion_al_cliente' => 'sometimes|string'
         ]);
 
         try {
             $tarea = Tarea::findOrFail($id);
+
+            // if (!Gate::allows('actualizar-tarea', $tarea)){
+            //     return response()->json(['error' => 'Accion no autorizada'], 403);
+            // }
+
             $tarea->update($validador);
 
             return response()->json([

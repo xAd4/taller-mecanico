@@ -42,6 +42,8 @@ class TrenTraseroController extends Controller {
             'comba'           => 'required|boolean',
             'brazos_susp'     => 'required|boolean',
             'articulaciones'  => 'required|boolean',
+            'conv2'           => 'required|boolean',
+            'comba2'          => 'required|boolean',
             'amort'           => 'required|boolean',
         ]);
 
@@ -52,6 +54,8 @@ class TrenTraseroController extends Controller {
                 'comba'          => $validador['comba'],
                 'brazos_susp'    => $validador['brazos_susp'],
                 'articulaciones' => $validador['articulaciones'],
+                'conv2'           => $validador['conv2'],
+                'comba2'          => $validador['comba2'],
                 'amort'          => $validador['amort'],
             ]);
 
@@ -79,6 +83,8 @@ class TrenTraseroController extends Controller {
             'comba'           => 'sometimes|boolean',
             'brazos_susp'     => 'sometimes|boolean',
             'articulaciones'  => 'sometimes|boolean',
+            'conv2'           => 'sometimes|boolean',
+            'comba2'          => 'sometimes|boolean',
             'amort'           => 'sometimes|boolean',
         ]);
 
