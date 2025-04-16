@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BuscadorController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EstadoNeumaticoController;
@@ -111,4 +112,9 @@ Route::middleware(['auth:sanctum', 'throttle:limitador_global'])->group(function
     // Route::get('estados-neumaticos/{estadoNeumatico}', [EstadoNeumaticoController::class, 'show']);
     Route::put('estados-neumaticos/{estadoNeumatico}', [EstadoNeumaticoController::class, 'update']);//->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
     Route::delete('estados-neumaticos/{estadoNeumatico}', [EstadoNeumaticoController::class, 'destroy']);//->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
+});
+
+//* Buscador para cliente
+Route::middleware('throttle:limitador_searching_cliente')->group(function(){
+    Route::get('/search/{collection}/{term}', [BuscadorController::class, 'search']);
 });

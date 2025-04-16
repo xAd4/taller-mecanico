@@ -26,4 +26,8 @@ class Orden extends Model {
     public function vehiculo() {
         return $this->belongsTo(Vehiculo::class);
     }
+
+    public function tareas(){
+        return $this->hasOne(Tarea::class);
+    }
 }

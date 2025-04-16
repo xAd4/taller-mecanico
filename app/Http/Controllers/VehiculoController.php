@@ -14,7 +14,7 @@ class VehiculoController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $vehiculos = Vehiculo::with(['cliente', 'orden'])->paginate(10);
+            $vehiculos = Vehiculo::with('ordenes')->paginate(10);
             return response()->json([
                 'status' => true,
                 'data' => $vehiculos,
