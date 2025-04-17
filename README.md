@@ -1,107 +1,64 @@
-**Contexto General del Proyecto:**  
-Se requiere requiere una **aplicación web integral y responsive** para optimizar la gestión de un taller mecánico, digitalizando procesos manuales y mejorando la comunicación entre el jefe de operaciones, los mecánicos y los clientes. La solución debe operar en un **servidor local** con base de datos integrada, estar en español y adaptarse al flujo de trabajo actual del taller, basado en los formularios físicos adjuntos.
+# 🛠️ Sistema para Taller Mecánico (Backend)
+
+**Backend** desarrollado en PHP para la gestión de un taller mecánico. Proporciona una API RESTful con autenticación JWT y control de roles.
 
 ---
 
-### **Objetivos Principales:**
+## 👨💼 Dashboards y Funcionalidades
 
-1. **Digitalizar órdenes de trabajo** según el formato físico proporcionado (`HojaDeCliente.jpg`).
-2. **Facilitar la colaboración interna**:
-    - Jefe de operaciones: Registra vehículos, asigna tareas y gestiona recursos.
-    - Mecánicos: Ejecutan tareas, documentan materiales y verifican procesos.
-3. **Mejorar la experiencia del cliente**: Permitir consultas en tiempo real sobre el estado de su vehículo.
+### 1. **Dashboard del Jefe de Taller** (`/jefe/**`)
 
----
+-   **Gestión Maestra**:
+    -   🧑🤝🧑 **Clientes**: CRUD completo de clientes (nombre, apellido, email, dni, RUT, teléfono y domicilio).
+    -   🚗 **Vehículos**: Registro de vehículos con detalles técnicos (modelo, marca, color, matrícula, kilometraje, numero de serie, numero de motor y fecha de compra).
+    -   📑 **Órdenes de Trabajo**:
+        -   Creación de órdenes vinculando cliente + vehículo.
+        -   Campos para datos extras que habla el estado de entrada del vehiculo, fecha de recepcion, fecha prometida, checkboxs de cambio de aceites y de filtro si aplica y detalles extras.
+    -   📦 **Inventario**:
+        -   Categorías de productos con su respectiva categoria (ej: "Lubricantes", "Frenos").
+        -   Productos con stock, precios y disponibilidad.
+    -   👥 **Usuarios**: Creación de mecánicos y otros jefes.
 
-### **Funcionalidades Clave:**
+### 2. **Dashboard del Mecánico** (`/mecanico/**`)
 
-#### **1. Para el Jefe de Operaciones (Dashboard Administrativo):**
+-   **Tareas Asignadas**:
+    -   ✅ Listado de tareas por estado (`pendiente`, `en_proceso`, `completado`).
+    -   ⚙️ Actualización en tiempo real del estado de las tareas.
+-   **Registro Técnico**:
+    -   🔧 **Componentes del Vehículo**:
+        -   Tren delantero/trasero.
+        -   Frenos.
+        -   Neumáticos.
+    -   📊 **Materiales Usados**:
+        -   Selección de productos del inventario.
+        -   Cálculo automático de costos (precio unitario \* cantidad).
 
--   **Carga de órdenes**:
-    -   Datos del cliente (nombre, RUT, teléfono, domicilio).
-    -   Detalles del vehículo (modelo, matrícula, kilometraje, número de serie).
-    -   **Campo adicional**: Descripción de daños externos (ej: rayones, abolladuras).
--   **Gestión de materiales**:
-    -   Añadir/editar materiales (nombre, precio unitario, stock. Se estima que esto lo manejen otros trabajadores).
--   **Gestión de usuarios**:
-    -   CRUD de usuarios (mecánicos y otros jefes).
--   **Edición de órdenes**:
-    -   Modificar estados (ej: "En revisión" → "Aprobado"), asignar mecánicos, corregir datos.
+### 3. **Consulta Pública para Clientes** (`/consulta`)
 
-#### **2. Para los Mecánicos (Dashboard Operativo):**
+-   🔍 **Búsqueda por Matrícula**:
+    -   Visualización del estado actual del vehículo.
+    -   Detalles de facturación (pendiente/pagado).
+-   🔒 **Sin Autenticación**: Acceso directo mediante matrícula.
 
--   **Vista de órdenes asignadas**:
-    -   Lista de tareas pendientes (ej: "Cambio de aceite", "Revisión de frenos").
-    -   **Registro de materiales**:
-        -   Tabla dinámica para añadir materiales usados (cantidad editable, precios bloqueados).
-        -   Cálculo automático de costos (total por ítem y suma final).
-    -   **Checkboxes de verificación**:
-        -   Tareas predefinidas (ej: "Neumáticos revisados") + comentarios opcionales.
--   **Restricciones**:
-    -   Solo puede editar campos relacionados a su trabajo (materiales usados y checkboxes).
+## 🛠️ Tecnologías Utilizadas
 
-#### **3. Para los Clientes (Acceso Público):**
-
--   **Consulta por matrícula**:
-    -   Estado del vehículo (ej: "En proceso", "Listo para retiro", "Por pagar").
-    -   Información básica: Fecha de ingreso, trabajos realizados.
--   **Sin autenticación**: Solo requiere la matrícula como identificador.
-
----
-
-### **Requisitos Técnicos:**
-
-#### **Frontend:**
-
--   **Tecnologías**: HTML/CSS/JavaScript con React.js + Bootstrap (para responsividad y dinamismo).
--   **Interfaces**:
-    -   Dashboard del jefe: Paneles de gestión con tablas y formularios.
-    -   Dashboard del mecánico: Vista simplificada para tabletas.
-    -   Consulta cliente: Página pública minimalista.
-    -   Posible dashboard para que ciertos empleados puedan editar los productos.
-
-#### **Backend:**
-
--   **Tecnologías**: PHP con Laravel.
--   **Funcionalidades**:
-    -   Autenticación por roles (jefe vs. mecánico).
-    -   Cálculos automáticos (ej: total de materiales).
-    -   Generación de estados para clientes.
-
-#### **Base de Datos:**
-
--   **Motor**: MySQL con Eloquent.
--   **Tablas principales**:
-    -   `Clientes`, `Vehículos`, `Órdenes`, `Materiales`, `Usuarios`, `ChecklistMecanico`, `Entre otros`.
--   **Relaciones**:
-    -   Una orden pertenece a un cliente y un vehículo.
-    -   Un mecánico puede tener múltiples órdenes asignadas.
-
-#### **Despliegue:**
-
--   **Entorno local**: XAMPP (PHP/MySQL).
--   **Documentación**: Instrucciones claras para instalar y ejecutar la aplicación.
+-   **Laravel 12** (PHP 8.2)
+-   **MySQL** (Motor de base de datos)
+-   **Eloquent ORM** (Gestión de relaciones DB)
+-   **Laravel Sanctum** (Autenticación API)
+-   **Postman** (Documentación y testing)
 
 ---
 
-### **Entregables Finales:**
+## 🔒 Consideraciones de Seguridad
 
-1. **Código fuente completo**:
-    - Frontend, backend y scripts de base de datos.
-2. **Documentación técnica**:
-    - Configuración inicial, estructura de la base de datos, roles de usuario.
+-   **Middlewares**:
+    -   `AutorizacionJefe`: Restringe acceso solo a usuarios con rol `jefe`.
+    -   `AutorizacionMecanico`: Restringe acceso solo a usuarios con rol `mecanico`.
+    -   `ChecarRol`: Verifica roles en cada endpoint.
+-   **Transacciones DB**:
+    -   Operaciones críticas (ej: actualización de stock) usan transacciones atómicas.
+-   **Rate Limiting**:
+    -   Límite de 100 peticiones por minuto por IP en endpoints públicos para evitar ataques de fuerza bruta.
 
 ---
-
-### **Ejemplo de Flujo de Trabajo:**
-
-1. **Recepción**:
-    - Jefe ingresa datos del cliente + vehículo, incluyendo "rayones".
-    - Crea una orden con estado "En revisión".
-2. **Reparación**:
-    - Mecánico ve la orden en su tablet, añade materiales (ej: 3 litros de aceite) y marca checkboxes.
-    - El estado se actualiza a "En proceso".
-3. **Finalización**:
-    - Jefe aprueba la orden y cambia el estado a "Listo para retiro".
-4. **Consulta del cliente**:
-    - Ingresa su matrícula en la página pública y ve "Listo para retiro" o el estado que toque en ese momento.
