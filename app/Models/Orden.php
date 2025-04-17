@@ -28,6 +28,6 @@ class Orden extends Model {
     }
 
     public function tareas(){
-        return $this->hasOne(Tarea::class);
+        return $this->hasMany(Tarea::class);
     }
 }

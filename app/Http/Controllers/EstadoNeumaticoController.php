@@ -52,6 +52,13 @@ class EstadoNeumaticoController extends Controller {
             $tarea = Tarea::findOrFail($validador['tarea_id']);
             $this->authorize('checar-id-mecanico', $tarea);
 
+            if ($tarea->estadoNeumaticos()->exists()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Esta tarea ya tiene un estado de neumaticos registrado'
+                ], 400);
+            }
+
             $nuevo_estado = EstadoNeumatico::create([
                 'tarea_id'               => $validador['tarea_id'],
                 'delanteros_derechos'    => $validador['delanteros_derechos'],

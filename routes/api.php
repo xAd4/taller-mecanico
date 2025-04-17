@@ -14,7 +14,6 @@ use App\Http\Controllers\TrenDelanteroController;
 use App\Http\Controllers\TrenTraseroController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Middleware\AutorizacionJefe;
-use App\Http\Middleware\AutorizacionMecanico;
 use App\Http\Middleware\ChecarRol;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,7 +25,7 @@ Route::get('/usuario', function (Request $request) {
 
 Route::middleware("throttle:auth")->group(function () {
     //? Registro y login
-    Route::post("registro", [AuthController::class, "register"]);
+    Route::post("registro", [AuthController::class, "register"]); // TODO: Acceso solo para los jefes
     Route::post("iniciar-sesion", [AuthController::class, "login"]);
 
     //? Logout (requiere autenticación)

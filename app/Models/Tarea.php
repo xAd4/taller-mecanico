@@ -50,8 +50,8 @@ class Tarea extends Model {
             return $productoUsado->calcularTotal();
         });
     }
-    
-    public function getPrecioTotalAttribute() {
-        return $this->getTotalMateriales() + $this->precio_de_trabajo;
-    }
+
+    // public function getTotalMaterialesAttribute() {
+    //     return $this->productosUsados->sum(fn($pu) => $pu->cantidad * $pu->producto->precio);
+    // }
 }

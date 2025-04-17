@@ -101,7 +101,7 @@ class TareaController extends Controller {
     public function update(Request $request, string $id): JsonResponse {
         $validador = $request->validate([
 
-            'estado_de_trabajo' => 'sometimes|in:pendiente,en_progreso,completado',
+            'estado_de_trabajo' => 'sometimes|in:pendiente,en_proceso,pendiente_de_facturacion,completado',
             'detalles_de_tarea' => 'sometimes|string|max:255',
             'notificacion_al_cliente' => 'sometimes|string'
         ]);

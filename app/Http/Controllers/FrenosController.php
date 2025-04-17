@@ -50,6 +50,13 @@ class FrenosController extends Controller {
             $tarea = Tarea::findOrFail($validador['tarea_id']);
             $this->authorize('checar-id-mecanico', $tarea);
 
+            if ($tarea->frenos()->exists()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Esta tarea ya tiene frenos registrados'
+                ], 400);
+            }
+
             $nuevo_freno = Frenos::create([
                 'tarea_id'        => $validador['tarea_id'],
                 'delanteros'      => $validador['delanteros'],

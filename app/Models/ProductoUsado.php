@@ -14,6 +14,8 @@ class ProductoUsado extends Model {
         'cantidad',
     ];
 
+    protected $appends = ['total'];
+
     public function tarea() {
         return $this->belongsTo(Tarea::class);
     }
@@ -24,5 +26,9 @@ class ProductoUsado extends Model {
 
     public function calcularTotal() {
         return $this->cantidad * $this->producto->precio;
+    }
+
+    public function getTotalAttribute() {
+        return $this->calcularTotal();
     }
 }

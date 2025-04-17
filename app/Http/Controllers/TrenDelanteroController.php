@@ -58,6 +58,13 @@ class TrenDelanteroController extends Controller {
             $tarea = Tarea::findOrFail($validador['tarea_id']);
             $this->authorize('checar-id-mecanico', $tarea);
 
+            if ($tarea->trenDelantero()->exists()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Esta tarea ya tiene un tren delantero registrado'
+                ], 400);
+            }
+
             $nuevo_tren_delantero = TrenDelantero::create([
                 'tarea_id'       => $validador['tarea_id'],
                 'conv'           => $validador['conv'],
