@@ -25,7 +25,7 @@ Route::get('/usuario', function (Request $request) {
 
 Route::middleware("throttle:auth")->group(function () {
     //? Registro y login
-    Route::post("registro", [AuthController::class, "register"]); // TODO: Acceso solo para los jefes
+    Route::post("registro", [AuthController::class, "register"]);
     Route::post("iniciar-sesion", [AuthController::class, "login"]);
 
     //? Logout (requiere autenticación)
