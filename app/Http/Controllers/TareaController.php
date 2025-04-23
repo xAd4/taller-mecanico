@@ -80,7 +80,7 @@ class TareaController extends Controller {
      */
     public function show(string $id): JsonResponse{
         try {
-            $tarea = Tarea::with(['orden','productosUsados','mecanico'])->findOrFail($id);
+            $tarea = Tarea::with(['orden.cliente','orden.vehiculo','productosUsados','mecanico','trenDelantero','trenTrasero','frenos','estadoNeumaticos'])->findOrFail($id);
             return response()->json([
                 'status' => true,
                 'data' => $tarea,

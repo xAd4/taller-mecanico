@@ -76,7 +76,7 @@ class OrdenController extends Controller {
      */
     public function show(string $id): JsonResponse {
         try {
-            $orden = Orden::with('cliente')->findOrFail($id);
+            $orden = Orden::with(['cliente', 'vehiculo', 'tareas.mecanico'])->findOrFail($id);
 
             return response()->json([
                 'status' => true,

@@ -89,28 +89,28 @@ Route::middleware(['auth:sanctum', 'throttle:limitador_global'])->group(function
     Route::post('trenes-delanteros', [TrenDelanteroController::class, 'store'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
     // Route::get('trenes-delanteros/{trenDelantero}', [TrenDelanteroController::class, 'show']);
     Route::put('trenes-delanteros/{trenDelantero}', [TrenDelanteroController::class, 'update'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
-    Route::delete('trenes-delanteros/{trenDelantero}', [TrenDelanteroController::class, 'destroy'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
+    // Route::delete('trenes-delanteros/{trenDelantero}', [TrenDelanteroController::class, 'destroy'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
 
     //* Trenes Traseros
     Route::get('trenes-traseros', [TrenTraseroController::class, 'index']);
     Route::post('trenes-traseros', [TrenTraseroController::class, 'store'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
     // Route::get('trenes-traseros/{trenTrasero}', [TrenTraseroController::class, 'show']);
     Route::put('trenes-traseros/{trenTrasero}', [TrenTraseroController::class, 'update'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
-    Route::delete('trenes-traseros/{trenTrasero}', [TrenTraseroController::class, 'destroy'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
+    // Route::delete('trenes-traseros/{trenTrasero}', [TrenTraseroController::class, 'destroy'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
 
     //* Frenos
     Route::get('frenos', [FrenosController::class, 'index']);
     Route::post('frenos', [FrenosController::class, 'store'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
     // Route::get('frenos/{freno}', [FrenosController::class, 'show']);
     Route::put('frenos/{freno}', [FrenosController::class, 'update'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
-    Route::delete('frenos/{freno}', [FrenosController::class, 'destroy'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
+    // Route::delete('frenos/{freno}', [FrenosController::class, 'destroy'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
 
     //* Estados Neumaticos
     Route::get('estados-neumaticos', [EstadoNeumaticoController::class, 'index']);
     Route::post('estados-neumaticos', [EstadoNeumaticoController::class, 'store'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
     // Route::get('estados-neumaticos/{estadoNeumatico}', [EstadoNeumaticoController::class, 'show']);
     Route::put('estados-neumaticos/{estadoNeumatico}', [EstadoNeumaticoController::class, 'update'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
-    Route::delete('estados-neumaticos/{estadoNeumatico}', [EstadoNeumaticoController::class, 'destroy'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
+    // Route::delete('estados-neumaticos/{estadoNeumatico}', [EstadoNeumaticoController::class, 'destroy'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
 });
 
 //* Buscador para cliente

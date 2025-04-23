@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\ProductoUsado;
 use App\Models\Tarea;
 use App\Models\User;
+use App\Observers\TareaObserver;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -24,6 +25,10 @@ class AppServiceProvider extends ServiceProvider {
         Gate::define('checar-id-mecanico', function (User $user, Tarea $tarea) {
             return $user->id === $tarea->mecanico_id;
         });
+
+        //* Observers
+        // Al crear una tarea, se crea automaticamente sus instancias relacionadas
+        Tarea::observe(TareaObserver::class);
 
         //* Limitadores para rutas
         RateLimiter::for('auth', function (Request $request) {
