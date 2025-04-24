@@ -38,7 +38,7 @@ class VehiculoController extends Controller {
             'marca' => 'required|string|max:255',
             'color' => 'required|string|max:255',
             'matricula' => 'required|string|max:255',
-            'kilometraje' => 'nullable|string',
+            'kilometraje' => 'required|string',
             'numero_de_serie' => 'nullable|string|max:255',
             'numero_de_motor' => 'nullable|string|max:255',
             'fecha_de_compra' => 'nullable|date',

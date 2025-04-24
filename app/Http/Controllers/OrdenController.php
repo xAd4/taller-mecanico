@@ -37,24 +37,24 @@ class OrdenController extends Controller {
         $validador = $request->validate([
             'cliente_id' => 'required|integer|exists:clientes,id',
             'vehiculo_id' => 'required|integer|exists:vehiculos,id',
-            'datos_extras' => 'nullable|string',
+            'detalle_de_trabajos_a_realizar' => 'nullable|string',
             'recepcion' => 'required|date',
             'prometido' => 'nullable|date',
             'cambio_de_aceite' => 'boolean|nullable',
             'cambio_de_filtro' => 'boolean|nullable',
-            'detalles' => 'required|string|max:255',
+            'detalles_de_entrada_del_vehiculo' => 'nullable|string|max:255',
         ]);
 
         try {
             $nueva_orden = Orden::create([
                 'cliente_id' => $validador['cliente_id'],
                 'vehiculo_id' => $validador['vehiculo_id'],
-                'datos_extras' => $validador['datos_extras'],
+                'detalle_de_trabajos_a_realizar' => $validador['detalle_de_trabajos_a_realizar'],
                 'recepcion' => $validador['recepcion'],
                 'prometido' => $validador['prometido'],
                 'cambio_de_aceite' => $validador['cambio_de_aceite'],
                 'cambio_de_filtro' => $validador['cambio_de_filtro'],
-                'detalles' => $validador['detalles'],
+                'detalles_de_entrada_del_vehiculo' => $validador['detalles_de_entrada_del_vehiculo'],
             ]);
 
             return response()->json([
@@ -99,12 +99,12 @@ class OrdenController extends Controller {
         $validador = $request->validate([
             'cliente_id' => 'sometimes|integer|exists:clientes,id',
             'vehiculo_id' => 'sometimes|integer|exists:vehiculos,id',
-            'datos_extras' => 'sometimes|string|max:255',
+            'detalle_de_trabajos_a_realizar' => 'sometimes|string|max:255',
             'recepcion' => 'sometimes|date',
             'prometido' => 'sometimes|date',
             'cambio_de_aceite' => 'sometimes|boolean|nullable',
             'cambio_de_filtro' => 'sometimes|boolean|nullable',
-            'detalles' => 'sometimes|string|max:255',
+            'detalles_de_entrada_del_vehiculo' => 'sometimes|string|max:255',
         ]);
 
         try {

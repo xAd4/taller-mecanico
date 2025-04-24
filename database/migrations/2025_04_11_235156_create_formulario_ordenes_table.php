@@ -11,12 +11,12 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('cliente_id')->constrained('clientes')->onDelete('cascade');
             $table->foreignId('vehiculo_id')->constrained('vehiculos')->onDelete('cascade');
-            $table->string('datos_extras')->nullable();
+            $table->text('detalle_de_trabajos_a_realizar')->nullable();
             $table->date('recepcion');
             $table->date('prometido')->nullable();
             $table->boolean('cambio_de_aceite')->default(false);
             $table->boolean('cambio_de_filtro')->default(false);
-            $table->text('detalles');
+            $table->text('detalles_de_entrada_del_vehiculo')->nullable();
             $table->timestamps();
         });
     }

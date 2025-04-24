@@ -38,7 +38,6 @@ class TareaController extends Controller {
             'orden_id' => 'required|integer|exists:ordens,id',
             'mecanico_id' => 'required|integer|exists:users,id',
             'estado_de_trabajo' => 'required|in:pendiente,en_proceso,pendiente_de_facturacion,completado',
-            'detalles_de_tarea' => 'nullable|string',
             'notificacion_al_cliente' => 'nullable|string'
         ]);
 
@@ -47,19 +46,10 @@ class TareaController extends Controller {
                 'orden_id' => $validador['orden_id'],
                 'mecanico_id' => $validador['mecanico_id'],
                 'estado_de_trabajo' => $validador['estado_de_trabajo'],
-                'detalles_de_tarea' => $validador['detalles_de_tarea'],
                 'notificacion_al_cliente' => $validador['notificacion_al_cliente']
             ]);
 
-            // Aquí puedes agregar la lógica para calcular el total de materiales y actualizar el precio total
-            // $nueva_tarea->precio_total = $nueva_tarea->getPrecioTotalAttribute();
-            // $nueva_tarea->save();
-            // Si necesitas calcular el total de materiales, puedes hacerlo aquí
-            // $nueva_tarea->total_materiales = $nueva_tarea->getTotalMateriales();
-            // $nueva_tarea->save();
-            // Si necesitas calcular el precio total, puedes hacerlo aquí
-            // $nueva_tarea->precio_total = $nueva_tarea->getPrecioTotalAttribute();
-            // $nueva_tarea->save();
+
 
             return response()->json([
                 'status' => true,
@@ -102,7 +92,6 @@ class TareaController extends Controller {
         $validador = $request->validate([
 
             'estado_de_trabajo' => 'sometimes|in:pendiente,en_proceso,pendiente_de_facturacion,completado',
-            'detalles_de_tarea' => 'sometimes|string|max:255',
             'notificacion_al_cliente' => 'sometimes|string'
         ]);
 
