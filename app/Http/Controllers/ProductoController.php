@@ -37,7 +37,7 @@ class ProductoController extends Controller {
         $validador = $request->validate([
             'categoria_id' => 'required|integer|exists:categorias,id',
             'nombre' => 'required|string|max:255',
-            'detalles' => 'nullable|string',
+            'detalles' => 'nullable|string|max:55',
             'marca' => 'required|string|max:255',
             'stock' => 'required|integer|min:0',
             'precio' => 'required|numeric|min:0',

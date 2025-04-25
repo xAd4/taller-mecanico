@@ -15,7 +15,7 @@ class TareaController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $tareas = Tarea::with(['orden','productosUsados','mecanico','trenDelantero','trenTrasero','frenos','estadoNeumaticos'])->paginate(10);
+            $tareas = Tarea::with(['orden.cliente','orden.vehiculo','productosUsados','mecanico','trenDelantero','trenTrasero','frenos','estadoNeumaticos'])->paginate(10);
             return response()->json([
                 'status' => true,
                 'data' => $tareas,
@@ -35,6 +35,7 @@ class TareaController extends Controller {
             $mecanicoId = $request->user()->id;
             
             $tareas = Tarea::with([
+                'mecanico',
                 'orden.cliente',
                 'orden.vehiculo',
                 'productosUsados.producto',
@@ -45,7 +46,7 @@ class TareaController extends Controller {
             ])
             ->where('mecanico_id', $mecanicoId)
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(10);
  
             return response()->json([
                 'status' => true,
