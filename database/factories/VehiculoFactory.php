@@ -12,7 +12,6 @@ class VehiculoFactory extends Factory
     public function definition()
     {
         return [
-            'cliente_id' => \App\Models\Cliente::inRandomOrder()->first()->id,
             'modelo' => $this->faker->word, 
             'marca' => $this->faker->company,
             'color' => $this->faker->colorName,

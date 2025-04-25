@@ -21,13 +21,6 @@ class ProductoFactory extends Factory {
             'nombre' => $this->faker->sentence(2),
             'detalles' => $this->faker->paragraph,
             'marca' => $this->faker->company,
-            'imagen' => 'productos/' . $this->faker->image(
-                dir: $directory, 
-                width: 640, 
-                height: 480, 
-                category: null, 
-                fullPath: false
-            ),
             'stock' => $this->faker->numberBetween(0, 100),
             'precio' => $this->faker->randomFloat(2, 10, 1000),
             'disponibilidad' => $this->faker->boolean(80)
