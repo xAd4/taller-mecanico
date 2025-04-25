@@ -53,8 +53,7 @@ class AuthController extends Controller {
      * @param Request $request La solicitud HTTP entrante que contiene las credenciales de inicio de sesión.
      * @return JsonResponse Una respuesta JSON con el token de acceso y los detalles del usuario, o un mensaje de error.
      */
-    public function login(Request $request): JsonResponse
-    {
+    public function login(Request $request): JsonResponse {
         try {
             $credentials = $request->validate([
                 'email' => 'required|email',
@@ -91,8 +90,7 @@ class AuthController extends Controller {
      * @param Request $request La solicitud HTTP entrante del usuario autenticado.
      * @return JsonResponse Una respuesta JSON que indica éxito o fallo.
      */
-    public function logout(Request $request): JsonResponse
-    {
+    public function logout(Request $request): JsonResponse {
         try {
             $request->user()->tokens()->delete();
             return response()->json(null, 204);

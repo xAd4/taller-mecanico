@@ -13,7 +13,6 @@ return new class extends Migration {
             $table->string('nombre');
             $table->text('detalles')->nullable();
             $table->string('marca');
-            $table->string('imagen')->nullable();
             $table->integer('stock')->default(0);
             $table->decimal('precio', 10, 2);
             $table->boolean('disponibilidad')->default(true);

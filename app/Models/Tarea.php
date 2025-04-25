@@ -12,7 +12,6 @@ class Tarea extends Model {
         'orden_id',
         'mecanico_id',
         'estado_de_trabajo',
-        'detalles_de_tarea',
         'notificacion_al_cliente',
     ];
 

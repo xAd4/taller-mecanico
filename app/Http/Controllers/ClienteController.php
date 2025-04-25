@@ -36,7 +36,6 @@ class ClienteController extends Controller {
     public function store(Request $request): JsonResponse {
         $validador = $request->validate([
             'nombre' => 'required|string|max:255',
-            'apellido' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:clientes,email',
             'rut' => 'required|string|max:12',
             'telefono' => 'required|string|max:20',
@@ -46,7 +45,6 @@ class ClienteController extends Controller {
         try {
             $nuevo_cliente = Cliente::create([
                 'nombre' => $validador['nombre'],
-                'apellido' => $validador['apellido'],
                 'email' => $validador['email'],
                 'rut' => $validador['rut'],
                 'telefono' => $validador['telefono'],
@@ -94,7 +92,6 @@ class ClienteController extends Controller {
     public function update(Request $request, string $id): JsonResponse {
         $validador = $request->validate([
             'nombre' => 'sometimes|string|max:255',
-            'apellido' => 'sometimes|string|max:255',
             'email' => 'sometimes|email|max:255|unique:clientes,email,' . $id,
             'rut' => 'sometimes|string|max:12',
             'telefono' => 'sometimes|string|max:20',

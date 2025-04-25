@@ -11,12 +11,12 @@ class Orden extends Model {
     protected $fillable = [
         'cliente_id',
         'vehiculo_id',
-        'datos_extras',
+        'detalle_de_trabajos_a_realizar',
         'recepcion',
         'prometido',
         'cambio_de_aceite',
         'cambio_de_filtro',
-        'detalles',
+        'detalles_de_entrada_del_vehiculo',
     ];
 
     public function cliente() {
