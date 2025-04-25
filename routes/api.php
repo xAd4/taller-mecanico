@@ -72,6 +72,7 @@ Route::middleware(['auth:sanctum', 'throttle:limitador_global'])->group(function
 
     //* Tareas
     Route::get('tareas', [TareaController::class, 'index']);
+    Route::get('tareas/mecanico', [TareaController::class, 'getByMecanico'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
     Route::post('tareas', [TareaController::class, 'store'])->middleware([AutorizacionJefe::class]);
     Route::get('tareas/{tarea}', [TareaController::class, 'show']);
     Route::put('tareas/{tarea}', [TareaController::class, 'update'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]); // Gate colocado
@@ -84,8 +85,7 @@ Route::middleware(['auth:sanctum', 'throttle:limitador_global'])->group(function
     Route::put('productos-usados/{productoUsado}', [ProductoUsadoController::class, 'update'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]); // Gate colocado
     Route::delete('productos-usados/{productoUsado}', [ProductoUsadoController::class, 'destroy'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]); // Gate colocado
 
-    //* Trenes Delanteros
-    Route::get('trenes-delanteros', [TrenDelanteroController::class, 'index']);
+    //* Trenes Delanteros Route::get('trenes-delanteros', [TrenDelanteroController::class, 'index']);
     Route::post('trenes-delanteros', [TrenDelanteroController::class, 'store'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);
     // Route::get('trenes-delanteros/{trenDelantero}', [TrenDelanteroController::class, 'show']);
     Route::put('trenes-delanteros/{trenDelantero}', [TrenDelanteroController::class, 'update'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]);

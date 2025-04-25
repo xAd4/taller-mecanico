@@ -30,6 +30,38 @@ class TareaController extends Controller {
         }
     }
 
+    public function getByMecanico(Request $request): JsonResponse {
+        try {
+            $mecanicoId = $request->user()->id;
+            
+            $tareas = Tarea::with([
+                'orden.cliente',
+                'orden.vehiculo',
+                'productosUsados.producto',
+                'trenDelantero',
+                'trenTrasero',
+                'frenos',
+                'estadoNeumaticos'
+            ])
+            ->where('mecanico_id', $mecanicoId)
+            ->orderBy('created_at', 'desc')
+            ->get();
+ 
+            return response()->json([
+                'status' => true,
+                'data' => $tareas,
+                'message' => 'Tareas del mecánico obtenidas correctamente'
+            ], 200);
+ 
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Error al obtener las tareas',
+                'error' => config('app.debug') ? $th->getMessage() : null
+            ], 500);
+        }
+    }
+
     /**
      * Creación de instancias de tareas hechas por jefes para mecánicos en la base de datos
      */
