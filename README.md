@@ -6,7 +6,7 @@
 
 ## 👨💼 Dashboards y Funcionalidades
 
-### 1. **Dashboard del Jefe de Taller** (`/jefe/**`)
+### 1. **Dashboard del Jefe de Taller** 
 
 -   **Gestión Maestra**:
     -   🧑🤝🧑 **Clientes**: CRUD completo de clientes (nombre, apellido, email, dni, RUT, teléfono y domicilio).
@@ -19,7 +19,7 @@
         -   Productos con stock, precios y disponibilidad.
     -   👥 **Usuarios**: Creación de mecánicos y otros jefes.
 
-### 2. **Dashboard del Mecánico** (`/mecanico/**`)
+### 2. **Dashboard del Mecánico** 
 
 -   **Tareas Asignadas**:
     -   ✅ Listado de tareas por estado (`pendiente`, `en_proceso`, `completado`).
@@ -33,7 +33,7 @@
         -   Selección de productos del inventario.
         -   Cálculo automático de costos (precio unitario \* cantidad).
 
-### 3. **Consulta Pública para Clientes** (`/consulta`)
+### 3. **Consulta Pública para Clientes**
 
 -   🔍 **Búsqueda por Matrícula**:
     -   Visualización del estado actual del vehículo.
