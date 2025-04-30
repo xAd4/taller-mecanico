@@ -14,7 +14,7 @@ class ClienteController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $clientes = Cliente::paginate(10);
+            $clientes = Cliente::paginate(50);
 
             return response()->json([
                 'status' => true,

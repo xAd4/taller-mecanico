@@ -32,15 +32,15 @@ class AppServiceProvider extends ServiceProvider {
 
         //* Limitadores para rutas
         RateLimiter::for('auth', function (Request $request) {
-            return Limit::perMinute(5)->by($request->user()?->id ?: $request->ip());
+            return Limit::perMinute(15)->by($request->user()?->id ?: $request->ip());
         });
 
         RateLimiter::for('limitador_global', function (Request $request) {
-            return Limit::perMinute(20)->by($request->user()?->id ?: $request->ip());
+            return Limit::perMinute(150)->by($request->user()?->id ?: $request->ip());
         });
 
         RateLimiter::for('limitador_searching_cliente', function (Request $request) {
-            return Limit::perMinute(10)->by($request->user()?->id ?: $request->ip());
+            return Limit::perMinute(150)->by($request->user()?->id ?: $request->ip());
         });
     }
 }

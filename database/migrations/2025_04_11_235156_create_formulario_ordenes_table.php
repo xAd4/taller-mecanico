@@ -14,8 +14,8 @@ return new class extends Migration {
             $table->text('detalle_de_trabajos_a_realizar')->nullable();
             $table->date('recepcion');
             $table->date('prometido')->nullable();
-            $table->boolean('cambio_de_aceite')->default(false);
-            $table->boolean('cambio_de_filtro')->default(false);
+            $table->boolean('cambio_de_aceite')->nullable()->default(false);
+            $table->boolean('cambio_de_filtro')->nullable()->default(false);
             $table->text('detalles_de_entrada_del_vehiculo')->nullable();
             $table->timestamps();
         });

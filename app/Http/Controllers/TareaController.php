@@ -15,7 +15,7 @@ class TareaController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $tareas = Tarea::with(['orden.cliente','orden.vehiculo','productosUsados','mecanico','trenDelantero','trenTrasero','frenos','estadoNeumaticos'])->paginate(10);
+            $tareas = Tarea::with(['orden.cliente','orden.vehiculo','productosUsados','mecanico','trenDelantero','trenTrasero','frenos','estadoNeumaticos'])->paginate(50);
             return response()->json([
                 'status' => true,
                 'data' => $tareas,
