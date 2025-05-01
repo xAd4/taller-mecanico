@@ -29,7 +29,7 @@ class UserController extends Controller {
         $validador = $request->validate([
             'name' => 'sometimes|string|max:255',
             'email' => 'sometimes|email|unique:users,email,' . $id,
-            'password' => 'sometimes|string|min:8|confirmed',
+            'password' => 'nullable|string|min:8|confirmed',
             'rol' => 'sometimes|in:' . User::ROL_JEFE . ',' . User::ROL_MECANICO,
         ]);
 
