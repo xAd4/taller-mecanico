@@ -14,7 +14,7 @@ class ProductoController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $productos = Producto::with('categoria')->paginate(10);
+            $productos = Producto::with('categoria')->paginate(50);
             
             return response()->json([
                 'status' => true,

@@ -9,7 +9,7 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('categorias', function (Blueprint $table) {
             $table->id();
-            $table->boolean('disponibilidad')->default(true);
+            $table->boolean('disponibilidad')->nullable()->default(false);
             $table->string('nombre')->unique();
             $table->timestamps();
         });

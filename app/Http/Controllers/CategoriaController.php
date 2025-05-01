@@ -14,7 +14,7 @@ class CategoriaController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $categorias = Categoria::with('productos')->paginate(10);
+            $categorias = Categoria::with('productos')->paginate(50);
             return response()->json([
                 'status' => true,
                 'data' => $categorias,
