@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EstadoNeumaticoController;
 use App\Http\Controllers\FrenosController;
+use App\Http\Controllers\MecanicoController;
 use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProductoUsadoController;
@@ -35,6 +36,9 @@ Route::middleware("throttle:auth")->group(function () {
 });
 
 Route::middleware(['auth:sanctum', 'throttle:limitador_global'])->group(function () {
+    //* Mecanicos
+    Route::get('mecanicos', [MecanicoController::class, 'getAllMecanicos']);
+
     //* Categorias
     Route::get('categorias', [CategoriaController::class, 'index']);
     Route::post('categorias', [CategoriaController::class, 'store'])->middleware([AutorizacionJefe::class]);

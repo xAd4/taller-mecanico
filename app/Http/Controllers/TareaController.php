@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tarea;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -29,6 +30,7 @@ class TareaController extends Controller {
             ], 400);
         }
     }
+
 
     public function getByMecanico(Request $request): JsonResponse {
         try {
@@ -123,7 +125,6 @@ class TareaController extends Controller {
      */
     public function update(Request $request, string $id): JsonResponse {
         $validador = $request->validate([
-
             'estado_de_trabajo' => 'sometimes|in:pendiente,en_proceso,pendiente_de_facturacion,completado',
             'notificacion_al_cliente' => 'sometimes|string'
         ]);
