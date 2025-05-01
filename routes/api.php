@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductoUsadoController;
 use App\Http\Controllers\TareaController;
 use App\Http\Controllers\TrenDelanteroController;
 use App\Http\Controllers\TrenTraseroController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Middleware\AutorizacionJefe;
 use App\Http\Middleware\ChecarRol;
@@ -36,6 +37,11 @@ Route::middleware("throttle:auth")->group(function () {
 });
 
 Route::middleware(['auth:sanctum', 'throttle:limitador_global'])->group(function () {
+    //* Usuarios
+    Route::get("usuarios", [UserController::class, 'index']);
+    Route::put("usuarios/{usuario}", [UserController::class, 'update'])->middleware([AutorizacionJefe::class]);
+    Route::delete("usuarios/{usuario}", [UserController::class, 'destroy'])->middleware([AutorizacionJefe::class]);
+
     //* Mecanicos
     Route::get('mecanicos', [MecanicoController::class, 'getAllMecanicos']);
 
