@@ -14,7 +14,7 @@ class VehiculoController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $vehiculos = Vehiculo::paginate(50);
+            $vehiculos = Vehiculo::orderBy('created_at', 'desc')->paginate(50);
             return response()->json([
                 'status' => true,
                 'data' => $vehiculos,
@@ -65,26 +65,6 @@ class VehiculoController extends Controller {
             return response()->json([
                 'status' => false,
                 'message' => 'Error al crear un nuevo vehiculo',
-                'error' => $th->getMessage(),
-            ], 400);
-        }
-    }
-
-    /**
-     * Especifiación de un vehiculo
-     */
-    public function show(string $id): JsonResponse {
-        try {
-            $vehiculo = Vehiculo::with('cliente')->findOrFail($id);
-            return response()->json([
-                'status' => true,
-                'data' => $vehiculo,
-                'message' => 'Vehiculo obtenido correctamente',
-            ], 200);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Error al obtener el vehiculo',
                 'error' => $th->getMessage(),
             ], 400);
         }

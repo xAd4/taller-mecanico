@@ -14,7 +14,7 @@ class ClienteController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $clientes = Cliente::paginate(50);
+            $clientes = Cliente::orderBy('created_at','desc')->paginate(50);
 
             return response()->json([
                 'status' => true,
@@ -65,27 +65,7 @@ class ClienteController extends Controller {
         }
     }
 
-    /**
-     * Visualización de clientes específicos
-     */
-    public function show(string $id): JsonResponse {
-        try {
-            $cliente = Cliente::with(['ordenes', 'vehiculos'])->findOrFail($id);
-
-            return response()->json([
-                'status' => true,
-                'data' => $cliente,
-                'message' => 'Cliente obtenido correctamente',
-            ], 200);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Error al obtener el cliente',
-                'error' => $th->getMessage(),
-            ], 400);
-        }
-    }
-
+  
     /**
      * Actualización de instancias de clientes en la base de datos
      */

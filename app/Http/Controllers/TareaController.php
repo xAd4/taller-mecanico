@@ -16,7 +16,7 @@ class TareaController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $tareas = Tarea::with(['orden.cliente','orden.vehiculo','productosUsados','mecanico','trenDelantero','trenTrasero','frenos','estadoNeumaticos'])->paginate(50);
+            $tareas = Tarea::with(['orden.cliente','orden.vehiculo','productosUsados','mecanico','trenDelantero','trenTrasero','frenos','estadoNeumaticos'])->orderBy('created_at', 'desc')->paginate(50);
             return response()->json([
                 'status' => true,
                 'data' => $tareas,
@@ -100,26 +100,7 @@ class TareaController extends Controller {
         }
     }
 
-    /**
-     * Visualización de tareas llevadas por mecánicos
-     */
-    public function show(string $id): JsonResponse{
-        try {
-            $tarea = Tarea::with(['orden.cliente','orden.vehiculo','productosUsados','mecanico','trenDelantero','trenTrasero','frenos','estadoNeumaticos'])->findOrFail($id);
-            return response()->json([
-                'status' => true,
-                'data' => $tarea,
-                'message' => 'Tarea obtenida correctamente',
-            ], 200);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Error al obtener la tarea',
-                'error' => $th->getMessage(),
-            ], 400);
-        }
-    }
-
+    
     /**
      * Actualización de instancias de tareas llevadas por mecánicos en la base de datos
      */

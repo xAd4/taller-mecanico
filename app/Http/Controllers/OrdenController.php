@@ -14,7 +14,7 @@ class OrdenController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $ordenes = Orden::with(['cliente', 'vehiculo'])->paginate(50);
+            $ordenes = Orden::with(['cliente', 'vehiculo'])->orderBy('created_at', 'desc')->paginate(50);
 
             return response()->json([
                 'status' => true,
