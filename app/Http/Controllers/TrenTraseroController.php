@@ -88,6 +88,29 @@ class TrenTraseroController extends Controller {
         }
     }
 
+
+    /**
+     * Visualización específica de un tren trasero
+     */
+    public function show(string $tareaId): JsonResponse {
+        try {
+            // Buscar el tren trasero asociado a la tarea
+            $trenTrasero = TrenTrasero::where('tarea_id', $tareaId)->with('tarea')->firstOrFail();
+    
+            return response()->json([
+                'status' => true,
+                'data' => $trenTrasero,
+                'message' => 'Tren trasero obtenido correctamente',
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Error al obtener el tren trasero',
+                'error' => $th->getMessage(),
+            ], 400);
+        }
+    }
+
     /**
      * Actualización de instancias de tren trasero en la base de datos
      */

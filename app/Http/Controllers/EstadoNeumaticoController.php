@@ -81,6 +81,29 @@ class EstadoNeumaticoController extends Controller {
         }
     }
 
+
+    /**
+     * Visualización específica de un neumaticos
+     */
+    public function show(string $tareaId): JsonResponse {
+        try {
+            // Buscar el freno asociado a la tarea
+            $estadoNeumaticos = EstadoNeumatico::where('tarea_id', $tareaId)->with('tarea')->firstOrFail();
+    
+            return response()->json([
+                'status' => true,
+                'data' => $estadoNeumaticos,
+                'message' => 'Neumaticos obtenido correctamente',
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Error al obtener neumaticos',
+                'error' => $th->getMessage(),
+            ], 400);
+        }
+    }
+
     /**
      * Actualización de instancias de estado de neumático en la base de datos
      */

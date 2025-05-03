@@ -114,6 +114,30 @@ class FrenosController extends Controller {
             ], 400);
         }
     }
+    
+
+     /**
+     * Visualización específica de un freno
+     */
+    public function show(string $tareaId): JsonResponse {
+        try {
+            // Buscar el freno asociado a la tarea
+            $frenos = Frenos::where('tarea_id', $tareaId)->with('tarea')->firstOrFail();
+    
+            return response()->json([
+                'status' => true,
+                'data' => $frenos,
+                'message' => 'Frenos obtenido correctamente',
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Error al obtener el freno',
+                'error' => $th->getMessage(),
+            ], 400);
+        }
+    }
+
 
     /**
      * Borrar una instancia de frenos en la base de datos
