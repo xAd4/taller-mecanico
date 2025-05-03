@@ -113,9 +113,9 @@ class TareaController extends Controller {
         try {
             $tarea = Tarea::findOrFail($id);
 
-             if (!Gate::allows('checar-id-mecanico', $tarea)){
-                 return response()->json(['error' => 'Accion no autorizada'], 403);
-             }
+            //  if (!Gate::allows('checar-id-mecanico', $tarea)){
+            //      return response()->json(['error' => 'Accion no autorizada'], 403);
+            //  }
 
             $tarea->update($validador);
 

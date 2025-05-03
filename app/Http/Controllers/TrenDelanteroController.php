@@ -35,6 +35,28 @@ class TrenDelanteroController extends Controller {
     }
 
     /**
+     * Visualización específica de un tren delantero
+     */
+    public function show(string $tareaId): JsonResponse {
+        try {
+            // Buscar el tren delantero asociado a la tarea
+            $trenDelantero = TrenDelantero::where('tarea_id', $tareaId)->with('tarea')->firstOrFail();
+    
+            return response()->json([
+                'status' => true,
+                'data' => $trenDelantero,
+                'message' => 'Tren delantero obtenido correctamente',
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Error al obtener el tren delantero',
+                'error' => $th->getMessage(),
+            ], 400);
+        }
+    }
+
+    /**
      * Creación de nuevas instancias de tren delantero en la base de datos
      */
     public function store(Request $request): JsonResponse {
