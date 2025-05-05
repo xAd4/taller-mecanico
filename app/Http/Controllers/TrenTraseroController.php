@@ -21,7 +21,7 @@ class TrenTraseroController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $trenes_traseros = TrenTrasero::with('tarea')->paginate(10);
+            $trenes_traseros = TrenTrasero::with('tarea')->get();
 
             return response()->json([
                 'status'  => true,

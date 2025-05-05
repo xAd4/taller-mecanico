@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 class MecanicoController extends Controller {
     public function getAllMecanicos(): JsonResponse {
         try {
-            $mecanicos = User::with("tareasAsignadas")
+            $mecanicos = User::with("tareasAsignadas")->orderBy('created_at', 'desc')
                 ->where('rol', User::ROL_MECANICO)
-                ->paginate(50);
+                ->get();
     
             return response()->json([
                 'status' => true,

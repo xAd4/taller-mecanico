@@ -16,6 +16,7 @@ class Cliente extends Model {
         'rut',
         'telefono',
         'domicilio',
+        'disponible',
     ];
 
     public function ordenes() { 

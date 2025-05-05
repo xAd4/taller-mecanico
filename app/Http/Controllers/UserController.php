@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller {
     public function index(): JsonResponse {
         try {
-            $usuarios = User::with("tareasAsignadas")->orderBy('created_at', 'desc')-> paginate(50);
+            $usuarios = User::with("tareasAsignadas")->orderBy('created_at', 'desc')->get();
     
             return response()->json([
                 'status' => true,

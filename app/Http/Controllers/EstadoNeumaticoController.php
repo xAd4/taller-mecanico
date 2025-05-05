@@ -20,7 +20,7 @@ class EstadoNeumaticoController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $estado_de_neumaticos = EstadoNeumatico::with('tarea')->paginate(10);
+            $estado_de_neumaticos = EstadoNeumatico::with('tarea')->get();
 
             return response()->json([
                 'status'  => true,

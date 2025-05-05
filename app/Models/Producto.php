@@ -15,7 +15,7 @@ class Producto extends Model {
         'marca',
         'stock',
         'precio',
-        'disponibilidad',
+        'disponible',
     ];
 
     public function categoria() {

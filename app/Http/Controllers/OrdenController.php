@@ -14,7 +14,7 @@ class OrdenController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $ordenes = Orden::with(['cliente', 'vehiculo'])->orderBy('created_at', 'desc')->paginate(50);
+            $ordenes = Orden::with(['cliente', 'vehiculo'])->orderBy('created_at', 'desc')->get();
 
             return response()->json([
                 'status' => true,
@@ -40,9 +40,10 @@ class OrdenController extends Controller {
             'detalle_de_trabajos_a_realizar' => 'nullable|string',
             'recepcion' => 'required|date',
             'prometido' => 'nullable|date',
-            'cambio_de_aceite' => 'boolean|nullable',
-            'cambio_de_filtro' => 'boolean|nullable',
+            'cambio_de_aceite' => 'nullable|boolean',
+            'cambio_de_filtro' => 'nullable|boolean',
             'detalles_de_entrada_del_vehiculo' => 'nullable|string|max:255',
+            'disponible' => 'nullable|boolean',
         ]);
 
         try {
@@ -55,6 +56,7 @@ class OrdenController extends Controller {
                 'cambio_de_aceite' => $validador['cambio_de_aceite'],
                 'cambio_de_filtro' => $validador['cambio_de_filtro'],
                 'detalles_de_entrada_del_vehiculo' => $validador['detalles_de_entrada_del_vehiculo'],
+                'disponible' => $validador['disponible'],
             ]);
 
             return response()->json([
@@ -102,9 +104,10 @@ class OrdenController extends Controller {
             'detalle_de_trabajos_a_realizar' => 'sometimes|string|max:255',
             'recepcion' => 'sometimes|date',
             'prometido' => 'sometimes|date',
-            'cambio_de_aceite' => 'sometimes|boolean|nullable',
-            'cambio_de_filtro' => 'sometimes|boolean|nullable',
+            'cambio_de_aceite' => 'sometimes|nullable|boolean',
+            'cambio_de_filtro' => 'sometimes|nullable|boolean',
             'detalles_de_entrada_del_vehiculo' => 'sometimes|string|max:255',
+            'disponible' => 'nullable|boolean',
         ]);
 
         try {

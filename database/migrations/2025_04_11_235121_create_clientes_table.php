@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->string('rut'); 
             $table->string('telefono');
             $table->string('domicilio')->nullable();
+            $table->boolean('disponible')->nullable()->default(true);
             $table->timestamps();
         });
     }

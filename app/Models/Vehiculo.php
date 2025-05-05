@@ -19,6 +19,7 @@ class Vehiculo extends Model {
         'numero_de_serie',
         'numero_de_motor',
         'fecha_de_compra',
+        'disponible',   
     ];
 
     public function ordenes() {

@@ -20,7 +20,7 @@ class ProductoUsadoController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $productos_usados = ProductoUsado::with(['producto', 'tarea'])->paginate(10);
+            $productos_usados = ProductoUsado::with(['producto', 'tarea'])->get();
             return response()->json([
                 'status' => true,
                 'data' => $productos_usados,
@@ -81,6 +81,28 @@ class ProductoUsadoController extends Controller {
             return response()->json([
                 'status' => false,
                 'message' => 'Error al crear un nuevo producto usado',
+                'error' => $th->getMessage(),
+            ], 400);
+        }
+    }
+
+    /**
+     * Visualización específica de los productos usados de una tarea
+     */
+    public function show(string $tareaId): JsonResponse {
+        try {
+            
+            $productosUsados = ProductoUsado::where('tarea_id', $tareaId)->with('tarea')->firstOrFail();
+    
+            return response()->json([
+                'status' => true,
+                'data' => $productosUsados,
+                'message' => 'Productos usados obtenidos correctamente',
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Error al obtener los productos usados',
                 'error' => $th->getMessage(),
             ], 400);
         }

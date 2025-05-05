@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('numero_de_serie')->nullable();
             $table->string('numero_de_motor')->nullable();
             $table->date('fecha_de_compra')->nullable();
+            $table->boolean('disponible')->nullable()->default(true);
             $table->timestamps();
         });
     }

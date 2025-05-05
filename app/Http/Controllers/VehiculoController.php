@@ -14,7 +14,7 @@ class VehiculoController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $vehiculos = Vehiculo::orderBy('created_at', 'desc')->paginate(50);
+            $vehiculos = Vehiculo::orderBy('created_at', 'desc')->get();
             return response()->json([
                 'status' => true,
                 'data' => $vehiculos,
@@ -42,6 +42,7 @@ class VehiculoController extends Controller {
             'numero_de_serie' => 'nullable|string|max:255',
             'numero_de_motor' => 'nullable|string|max:255',
             'fecha_de_compra' => 'nullable|date',
+            'disponible' => 'nullable|boolean',
         ]);
 
         try {
@@ -54,6 +55,7 @@ class VehiculoController extends Controller {
                 'numero_de_serie' => $validador['numero_de_serie'],
                 'numero_de_motor' => $validador['numero_de_motor'],
                 'fecha_de_compra' => $validador['fecha_de_compra'],
+                'disponible' => $validador['disponible'],
             ]);
 
             return response()->json([
@@ -83,6 +85,7 @@ class VehiculoController extends Controller {
             'numero_de_serie' => 'sometimes|string|max:255',
             'numero_de_motor' => 'sometimes|string|max:255',
             'fecha_de_compra' => 'sometimes|date',
+            'disponible' => 'nullable|boolean',
         ]);
 
         try {

@@ -18,7 +18,7 @@ class FrenosController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $frenos = Frenos::with('tarea')->paginate(10);
+            $frenos = Frenos::with('tarea')->get();
 
             return response()->json([
                 'status'  => true,

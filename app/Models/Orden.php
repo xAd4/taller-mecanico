@@ -17,6 +17,7 @@ class Orden extends Model {
         'cambio_de_aceite',
         'cambio_de_filtro',
         'detalles_de_entrada_del_vehiculo',
+        'disponible',
     ];
 
     public function cliente() {

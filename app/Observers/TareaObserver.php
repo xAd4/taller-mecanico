@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\EstadoNeumatico;
 use App\Models\Frenos;
+use App\Models\ProductoUsado;
 use App\Models\Tarea;
 use App\Models\TrenDelantero;
 use App\Models\TrenTrasero;
@@ -17,5 +18,6 @@ class TareaObserver {
         $tarea->trenTrasero()->create([]);
         $tarea->frenos()->create([]);
         $tarea->estadoNeumaticos()->create([]);
+        $tarea->productosUsados()->create([]);
     }
 }

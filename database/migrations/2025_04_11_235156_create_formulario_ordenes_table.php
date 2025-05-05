@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->boolean('cambio_de_aceite')->nullable()->default(false);
             $table->boolean('cambio_de_filtro')->nullable()->default(false);
             $table->text('detalles_de_entrada_del_vehiculo')->nullable();
+            $table->boolean('disponible')->nullable()->default(true);
             $table->timestamps();
         });
     }

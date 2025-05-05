@@ -91,7 +91,7 @@ Route::middleware(['auth:sanctum', 'throttle:limitador_global'])->group(function
     //* Productos Usados
     Route::get('productos-usados', [ProductoUsadoController::class, 'index']);
     Route::post('productos-usados', [ProductoUsadoController::class, 'store'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]); // Gate colocado
-    // Route::get('productos-usados/{productoUsado}', [ProductoUsadoController::class, 'show']);
+    Route::get('productos-usados/{productoUsado}', [ProductoUsadoController::class, 'show']);
     Route::put('productos-usados/{productoUsado}', [ProductoUsadoController::class, 'update'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]); // Gate colocado
     Route::delete('productos-usados/{productoUsado}', [ProductoUsadoController::class, 'destroy'])->middleware([ChecarRol::class . ':' . User::ROL_JEFE . ',' . User::ROL_MECANICO ]); // Gate colocado
 
