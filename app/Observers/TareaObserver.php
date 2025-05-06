@@ -18,6 +18,5 @@ class TareaObserver {
         $tarea->trenTrasero()->create([]);
         $tarea->frenos()->create([]);
         $tarea->estadoNeumaticos()->create([]);
-        $tarea->productosUsados()->create([]);
     }
 }

@@ -48,7 +48,7 @@ class TareaController extends Controller {
             ])
             ->where('mecanico_id', $mecanicoId)
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->get();
  
             return response()->json([
                 'status' => true,

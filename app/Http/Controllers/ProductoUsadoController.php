@@ -47,9 +47,7 @@ class ProductoUsadoController extends Controller {
         ]);
 
         try {
-
             // Valida que hayan stocks suficientes en la base de datos
-            
             $producto = Producto::find($validador['producto_id']); 
             $tarea = Tarea::findOrFail($validador['tarea_id']);
             $this->authorize('checar-id-mecanico', $tarea);
@@ -92,7 +90,7 @@ class ProductoUsadoController extends Controller {
     public function show(string $tareaId): JsonResponse {
         try {
             
-            $productosUsados = ProductoUsado::where('tarea_id', $tareaId)->with('tarea')->firstOrFail();
+            $productosUsados = ProductoUsado::where('tarea_id', $tareaId)->with('tarea')->get();
     
             return response()->json([
                 'status' => true,
