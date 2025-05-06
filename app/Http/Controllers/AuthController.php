@@ -29,6 +29,7 @@ class AuthController extends Controller {
                 'email' => $validated['email'],
                 'password' => Hash::make($validated['password']),
                 "rol" => User::ROL_MECANICO,
+                "disponible" => true,
             ]);
 
             return response()->json([

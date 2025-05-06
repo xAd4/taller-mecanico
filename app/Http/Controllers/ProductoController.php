@@ -41,17 +41,15 @@ class ProductoController extends Controller {
             'marca' => 'required|string|max:255',
             'stock' => 'required|integer|min:0',
             'precio' => 'required|numeric|min:0',
-            'disponibilidad' => 'nullable|boolean',
         ]);
         try {
             $nuevo_producto = Producto::create([
                 'categoria_id' => $validador['categoria_id'],
                 'nombre' => $validador['nombre'],
-                'detalles' => $validador['detalles'],
+                'detalles' => $validador['detalles'] ?? "N/A",
                 'marca' => $validador['marca'],
                 'stock' => $validador['stock'],
                 'precio' => $validador['precio'],
-                'disponibilidad' => $validador['disponibilidad'],
             ]);
 
             return response()->json([
@@ -80,7 +78,6 @@ class ProductoController extends Controller {
             'marca' => 'sometimes|string|max:255',
             'stock' => 'sometimes|integer|min:0',
             'precio' => 'sometimes|numeric|min:0',
-            'disponibilidad' => 'sometimes|boolean',
         ]);
 
         try {

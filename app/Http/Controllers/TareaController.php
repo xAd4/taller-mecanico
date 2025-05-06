@@ -81,10 +81,8 @@ class TareaController extends Controller {
                 'orden_id' => $validador['orden_id'],
                 'mecanico_id' => $validador['mecanico_id'],
                 'estado_de_trabajo' => $validador['estado_de_trabajo'],
-                'notificacion_al_cliente' => $validador['notificacion_al_cliente']
+                'notificacion_al_cliente' => $validador['notificacion_al_cliente'] ?? "N/A",
             ]);
-
-
 
             return response()->json([
                 'status' => true,

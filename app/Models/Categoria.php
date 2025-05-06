@@ -8,7 +8,6 @@ class Categoria extends Model {
     use HasFactory;
 
     protected $fillable = [
-        'disponible',
         'nombre',
     ];
 

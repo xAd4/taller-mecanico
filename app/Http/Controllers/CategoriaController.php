@@ -34,7 +34,6 @@ class CategoriaController extends Controller {
      */
     public function store(Request $request): JsonResponse {
         $validador = $request->validate([
-            'disponibilidad' => 'nullable|boolean',
             'nombre' => 'required|string|max:255',
         ]);
 
@@ -63,7 +62,6 @@ class CategoriaController extends Controller {
     public function update(Request $request, string $id): JsonResponse {
         $validador = $request->validate([
             'nombre' => 'sometimes|string|max:255',
-            'disponibilidad' => 'sometimes|boolean',
         ]);
 
         try {

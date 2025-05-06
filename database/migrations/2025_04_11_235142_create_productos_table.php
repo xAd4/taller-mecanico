@@ -15,7 +15,6 @@ return new class extends Migration {
             $table->string('marca');
             $table->integer('stock')->default(0);
             $table->decimal('precio', 10, 2);
-            $table->boolean('disponible')->default(true);
             $table->timestamps();
         });
     }

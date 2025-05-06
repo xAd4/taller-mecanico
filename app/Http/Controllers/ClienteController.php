@@ -14,7 +14,7 @@ class ClienteController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $clientes = Cliente::orderBy('created_at','desc')->get();
+            $clientes = Cliente::orderByRaw('disponible DESC')->orderBy('created_at','desc')->get();
 
             return response()->json([
                 'status' => true,
@@ -40,7 +40,7 @@ class ClienteController extends Controller {
             'rut' => 'required|string|max:12',
             'telefono' => 'required|string|max:20',
             'domicilio' => 'nullable|string|max:255',
-            'disponible' => 'nullable|boolean',
+
         ]);
 
         try {
@@ -49,8 +49,8 @@ class ClienteController extends Controller {
                 'email' => $validador['email'],
                 'rut' => $validador['rut'],
                 'telefono' => $validador['telefono'],
-                'domicilio' => $validador['domicilio'],
-                'disponible' => $validador['disponible'],
+                'domicilio' => $validador['domicilio'] ?? "N/A",
+                'disponible' => true,
             ]);
 
             return response()->json([

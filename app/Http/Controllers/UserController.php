@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller {
     public function index(): JsonResponse {
         try {
-            $usuarios = User::with("tareasAsignadas")->orderBy('created_at', 'desc')->get();
+            $usuarios = User::orderByRaw('disponible DESC')->with("tareasAsignadas")->orderBy('created_at', 'desc')->get();
     
             return response()->json([
                 'status' => true,
@@ -31,6 +31,7 @@ class UserController extends Controller {
             'email' => 'sometimes|email|unique:users,email,' . $id,
             'password' => 'nullable|string|min:8|confirmed',
             'rol' => 'sometimes|in:' . User::ROL_JEFE . ',' . User::ROL_MECANICO,
+            'disponible' => 'sometimes|boolean',
         ]);
 
         try {

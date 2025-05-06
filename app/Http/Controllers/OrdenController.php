@@ -14,7 +14,7 @@ class OrdenController extends Controller {
      */
     public function index(): JsonResponse {
         try {
-            $ordenes = Orden::with(['cliente', 'vehiculo'])->orderBy('created_at', 'desc')->get();
+            $ordenes = Orden::orderByRaw('disponible DESC')->with(['cliente', 'vehiculo'])->orderBy('created_at', 'desc')->get();
 
             return response()->json([
                 'status' => true,
@@ -43,20 +43,19 @@ class OrdenController extends Controller {
             'cambio_de_aceite' => 'nullable|boolean',
             'cambio_de_filtro' => 'nullable|boolean',
             'detalles_de_entrada_del_vehiculo' => 'nullable|string|max:255',
-            'disponible' => 'nullable|boolean',
         ]);
 
         try {
             $nueva_orden = Orden::create([
                 'cliente_id' => $validador['cliente_id'],
                 'vehiculo_id' => $validador['vehiculo_id'],
-                'detalle_de_trabajos_a_realizar' => $validador['detalle_de_trabajos_a_realizar'],
+                'detalle_de_trabajos_a_realizar' => $validador['detalle_de_trabajos_a_realizar'] ?? "N/A",
                 'recepcion' => $validador['recepcion'],
-                'prometido' => $validador['prometido'],
-                'cambio_de_aceite' => $validador['cambio_de_aceite'],
-                'cambio_de_filtro' => $validador['cambio_de_filtro'],
-                'detalles_de_entrada_del_vehiculo' => $validador['detalles_de_entrada_del_vehiculo'],
-                'disponible' => $validador['disponible'],
+                'prometido' => $validador['prometido'] ?? "1900-01-01",
+                'cambio_de_aceite' => $validador['cambio_de_aceite'] ?? false,
+                'cambio_de_filtro' => $validador['cambio_de_filtro'] ?? false,
+                'detalles_de_entrada_del_vehiculo' => $validador['detalles_de_entrada_del_vehiculo'] ?? "N/A",
+                'disponible' => true,
             ]);
 
             return response()->json([
