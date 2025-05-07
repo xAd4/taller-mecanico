@@ -61,35 +61,35 @@ class BuscadorController extends Controller {
     }
 
     private function searchOrdenes(string $term): JsonResponse
-    {
-        try {
-            $isNumericId = is_numeric($term);
-            
-            $query = Orden::with(['cliente', 'vehiculo', 'tareas']);
+{
+    try {
+        // Normalizar el término de búsqueda eliminando guiones
+        $normalizedTerm = str_replace('-', '', $term);
 
-            if ($isNumericId) {
-                $query->where('id', $term);
-            } else {
-                // Búsqueda por matrícula del vehículo asociado
-                $query->whereHas('vehiculo', function($q) use ($term) {
-                    $q->where('matricula', 'LIKE', "%{$term}%");
-                });
-            }
+        $query = Orden::with(['cliente', 'vehiculo', 'tareas']);
 
-            $results = $query->get();
-
-            return response()->json([
-                'status' => true,
-                'data' => ['results' => $results],
-                'message' => 'Búsqueda de órdenes realizada correctamente'
-            ]);
-
-        } catch (\Throwable $th) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Error en búsqueda de órdenes',
-                'error' => config('app.debug') ? $th->getMessage() : null
-            ], 500);
+        if (is_numeric($normalizedTerm)) {
+            $query->where('id', $normalizedTerm);
+        } else {
+            // Búsqueda por matrícula del vehículo asociado
+            $query->whereHas('vehiculo', function ($q) use ($normalizedTerm) {
+                $q->where(DB::raw("REPLACE(matricula, '-', '')"), 'LIKE', "%{$normalizedTerm}%");
+            });
         }
+
+        $results = $query->orderBy('created_at', 'desc')->get();
+
+        return response()->json([
+            'status' => true,
+            'data' => ['results' => $results],
+            'message' => 'Búsqueda de órdenes realizada correctamente',
+        ]);
+    } catch (\Throwable $th) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Error en búsqueda de órdenes',
+            'error' => config('app.debug') ? $th->getMessage() : null,
+        ], 500);
     }
+}
 }
