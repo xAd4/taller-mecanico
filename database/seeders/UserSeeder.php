@@ -17,7 +17,7 @@ class UserSeeder extends Seeder {
         ]);
 
         // Mecánicos
-        User::factory()->count(3)->create([
+        User::factory()->count(50)->create([
             'rol' => User::ROL_MECANICO
         ]);
     }

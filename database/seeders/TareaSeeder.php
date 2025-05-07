@@ -7,6 +7,6 @@ use Illuminate\Database\Seeder;
 
 class TareaSeeder extends Seeder {
     public function run() {
-        Tarea::factory()->count(40)->create();
+        Tarea::factory()->count(120)->create();
     }
 }

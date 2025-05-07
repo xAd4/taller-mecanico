@@ -23,7 +23,6 @@ class ProductoFactory extends Factory {
             'marca' => $this->faker->company,
             'stock' => $this->faker->numberBetween(0, 100),
             'precio' => $this->faker->randomFloat(2, 10, 1000),
-            'disponibilidad' => $this->faker->boolean(80)
         ];
     }
 }

@@ -7,6 +7,6 @@ use Illuminate\Database\Seeder;
 
 class OrdenSeeder extends Seeder {
     public function run() {
-        Orden::factory()->count(25)->create();
+        Orden::factory()->count(60)->create();
     }
 }

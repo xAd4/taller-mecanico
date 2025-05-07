@@ -17,7 +17,8 @@ class OrdenFactory extends Factory {
             'prometido' => $this->faker->dateTimeBetween('now', '+1 month'),
             'cambio_de_aceite' => $this->faker->boolean,
             'cambio_de_filtro' => $this->faker->boolean,
-            'detalles_de_entrada_del_vehiculo' => $this->faker->paragraph
+            'detalles_de_entrada_del_vehiculo' => $this->faker->paragraph,
+            'disponible' => $this->faker->boolean(90),
         ];
     }
 }

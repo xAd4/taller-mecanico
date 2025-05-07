@@ -7,6 +7,6 @@ use Illuminate\Database\Seeder;
 
 class CategoriaSeeder extends Seeder {
     public function run() {
-        Categoria::factory()->count(5)->create();
+        Categoria::factory()->count(15)->create();
     }
 }

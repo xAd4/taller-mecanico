@@ -11,7 +11,6 @@ class CategoriaFactory extends Factory {
     public function definition() {
         return [
             'nombre' => $this->faker->unique()->word,
-            'disponibilidad' => $this->faker->boolean(90) // 90% de probabilidad de true
         ];
     }
 }

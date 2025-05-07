@@ -14,7 +14,8 @@ class ClienteFactory extends Factory {
             'email' => $this->faker->unique()->safeEmail,
             'rut' => $this->faker->unique()->numerify('########'),
             'telefono' => $this->faker->phoneNumber,
-            'domicilio' => $this->faker->address
+            'domicilio' => $this->faker->address,
+            'disponible' => $this->faker->boolean(90)
         ];
     }
 }

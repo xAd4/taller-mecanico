@@ -19,7 +19,8 @@ class VehiculoFactory extends Factory
             'kilometraje' => $this->faker->numberBetween(0, 200000),
             'numero_de_serie' => $this->faker->regexify('[A-HJ-NPR-Z0-9]{17}'),
             'numero_de_motor' => $this->faker->regexify('[A-Z0-9]{10}'),
-            'fecha_de_compra' => $this->faker->date
+            'fecha_de_compra' => $this->faker->date,
+            'disponible' => $this->faker->boolean(90),
         ];
     }
 }

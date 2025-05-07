@@ -104,6 +104,8 @@ class TareaController extends Controller {
      */
     public function update(Request $request, string $id): JsonResponse {
         $validador = $request->validate([
+            'orden_id' => 'sometimes|integer|exists:ordens,id',
+            'mecanico_id' => 'sometimes|integer|exists:users,id',
             'estado_de_trabajo' => 'sometimes|in:pendiente,en_proceso,pendiente_de_facturacion,completado',
             'notificacion_al_cliente' => 'sometimes|string'
         ]);
