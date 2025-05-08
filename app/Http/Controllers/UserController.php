@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller {
     public function index(): JsonResponse {
@@ -29,14 +30,21 @@ class UserController extends Controller {
         $validador = $request->validate([
             'name' => 'sometimes|string|max:255',
             'email' => 'sometimes|email|unique:users,email,' . $id,
-            'password' => 'nullable|string|min:8|confirmed',
+            'password' => 'sometimes|string|min:8|confirmed',
             'rol' => 'sometimes|in:' . User::ROL_JEFE . ',' . User::ROL_MECANICO,
             'disponible' => 'sometimes|boolean',
         ]);
 
         try {
             $usuario = User::findOrFail($id);
-            $usuario->update($validador);
+
+            $usuario->update([
+                'name' => $validador['name'],
+                'email' => $validador['email'],
+                'password' => Hash::make($validador['password']),
+                "rol" => User::ROL_MECANICO,
+                "disponible" => true,
+            ]);
 
             return response()->json([
                 'status' => true,
