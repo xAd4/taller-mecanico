@@ -42,7 +42,7 @@ class UserController extends Controller {
                 'name' => $validador['name'],
                 'email' => $validador['email'],
                 'password' => Hash::make($validador['password']),
-                "rol" => User::ROL_MECANICO,
+                "rol" => $validador['rol'],
                 "disponible" => true,
             ]);
 

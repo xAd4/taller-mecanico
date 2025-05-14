@@ -130,9 +130,9 @@ class TrenTraseroController extends Controller {
             $tren_trasero = TrenTrasero::findOrFail($id);
             $tarea = $tren_trasero->tarea;
 
-            if (!Gate::allows('checar-id-mecanico', $tarea)){
-                return response()->json(['error' => 'Accion no autorizada'], 403);
-            }
+            // if (!Gate::allows('checar-id-mecanico', $tarea)){
+            //     return response()->json(['error' => 'Accion no autorizada'], 403);
+            // }
             $tren_trasero->update($validador);
 
             return response()->json([

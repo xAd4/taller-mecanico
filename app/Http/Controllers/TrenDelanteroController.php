@@ -139,9 +139,9 @@ class TrenDelanteroController extends Controller {
             $tren_delantero = TrenDelantero::findOrFail($id);
             $tarea = $tren_delantero->tarea;
 
-            if (!Gate::allows('checar-id-mecanico', $tarea)){
-                return response()->json(['error' => 'Accion no autorizada'], 403);
-            }
+            // if (!Gate::allows('checar-id-mecanico', $tarea)){
+            //     return response()->json(['error' => 'Accion no autorizada'], 403);
+            // }
 
             $tren_delantero->update($validador);
 

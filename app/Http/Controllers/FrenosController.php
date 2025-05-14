@@ -95,9 +95,9 @@ class FrenosController extends Controller {
             $freno = Frenos::findOrFail($id);
             $tarea = $freno->tarea;
 
-            if (!Gate::allows('checar-id-mecanico', $tarea)){
-                return response()->json(['error' => 'Accion no autorizada'], 403);
-            }
+            // if (!Gate::allows('checar-id-mecanico', $tarea)){
+            //     return response()->json(['error' => 'Accion no autorizada'], 403);
+            // }
 
             $freno->update($validador);
 
@@ -147,9 +147,9 @@ class FrenosController extends Controller {
             $freno = Frenos::findOrFail($id);
             $tarea = $freno->tarea;
 
-            if (!Gate::allows('checar-id-mecanico', $tarea)){
-                return response()->json(['error' => 'Accion no autorizada'], 403);
-            }
+            // if (!Gate::allows('checar-id-mecanico', $tarea)){
+            //     return response()->json(['error' => 'Accion no autorizada'], 403);
+            // }
 
             $freno->delete();
 

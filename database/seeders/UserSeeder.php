@@ -15,10 +15,5 @@ class UserSeeder extends Seeder {
             'password' => Hash::make('password'),
             'rol' => User::ROL_JEFE
         ]);
-
-        // Mecánicos
-        User::factory()->count(50)->create([
-            'rol' => User::ROL_MECANICO
-        ]);
     }
 }

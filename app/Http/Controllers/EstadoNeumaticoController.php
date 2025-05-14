@@ -120,9 +120,9 @@ class EstadoNeumaticoController extends Controller {
             $estado = EstadoNeumatico::findOrFail($id);
             $tarea = $estado->tarea;
 
-            if (!Gate::allows('checar-id-mecanico', $tarea)){
-                return response()->json(['error' => 'Accion no autorizada'], 403);
-            }
+            // if (!Gate::allows('checar-id-mecanico', $tarea)){
+            //     return response()->json(['error' => 'Accion no autorizada'], 403);
+            // }
             $estado->update($validador);
 
             return response()->json([

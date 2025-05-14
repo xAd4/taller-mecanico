@@ -50,7 +50,7 @@ class ProductoUsadoController extends Controller {
             // Valida que hayan stocks suficientes en la base de datos
             $producto = Producto::find($validador['producto_id']); 
             $tarea = Tarea::findOrFail($validador['tarea_id']);
-            $this->authorize('checar-id-mecanico', $tarea);
+            // $this->authorize('checar-id-mecanico', $tarea);
 
             // Validacion de stock
             if ($producto->stock < $validador['cantidad']) {
@@ -124,9 +124,9 @@ class ProductoUsadoController extends Controller {
             $producto = $producto_usado->producto;
             $tarea = $producto_usado->tarea;
 
-            if (!Gate::allows('checar-id-mecanico', $tarea)){
-                return response()->json(['error' => 'Accion no autorizada'], 403);
-            }
+            // if (!Gate::allows('checar-id-mecanico', $tarea)){
+            //     return response()->json(['error' => 'Accion no autorizada'], 403);
+            // }
 
             $nueva_cantidad = $validador['cantidad'] ?? $producto_usado->cantidad;
             $diferencia = $nueva_cantidad - $producto_usado->cantidad;
