@@ -171,11 +171,11 @@ class ProductoUsadoController extends Controller {
         // Se calcula el stock que tenia antes de borrarse, y cuando se borra una instancia se devuelven todos los stocks utilizados
         try {
             $producto_usado = ProductoUsado::findOrFail($id);
-            $tarea = $producto_usado->tarea;
+            // $tarea = $producto_usado->tarea;
     
-            if (!Gate::allows('checar-id-mecanico', $tarea)) {
-                return response()->json(['error' => 'Accion no autorizada'], 403);
-            }
+            // if (!Gate::allows('checar-id-mecanico', $tarea)) {
+            //     return response()->json(['error' => 'Accion no autorizada'], 403);
+            // }
     
             // Recuperar el producto asociado
             $producto = $producto_usado->producto;
