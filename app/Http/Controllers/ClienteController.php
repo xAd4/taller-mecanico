@@ -37,7 +37,7 @@ class ClienteController extends Controller {
         $validador = $request->validate([
             'nombre' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:clientes,email',
-            'rut' => 'required|string|max:12',
+            'rut' => 'nullable|string|max:12',
             'telefono' => 'required|string|max:20',
             'domicilio' => 'nullable|string|max:255',
 
@@ -47,7 +47,7 @@ class ClienteController extends Controller {
             $nuevo_cliente = Cliente::create([
                 'nombre' => $validador['nombre'],
                 'email' => $validador['email'],
-                'rut' => $validador['rut'],
+                'rut' => $validador['rut'] ?? "N/A",
                 'telefono' => $validador['telefono'],
                 'domicilio' => $validador['domicilio'] ?? "N/A",
                 'disponible' => true,

@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->string('nombre');
             $table->string('email');
-            $table->string('rut'); 
+            $table->string('rut')->nullable();
             $table->string('telefono');
             $table->string('domicilio')->nullable();
             $table->boolean('disponible')->nullable()->default(true);
