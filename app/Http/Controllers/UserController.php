@@ -43,7 +43,7 @@ class UserController extends Controller {
                 'email' => $validador['email'],
                 'password' => Hash::make($validador['password']),
                 "rol" => $validador['rol'],
-                "disponible" => true,
+                "disponible" => $validador['disponible'],
             ]);
 
             return response()->json([
